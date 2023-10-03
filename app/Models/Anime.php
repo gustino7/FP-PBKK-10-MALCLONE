@@ -10,4 +10,11 @@ class Anime extends Model
     protected $table = 'anime';
 
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'cover_image',
+        'rating'
+    ];
 }
