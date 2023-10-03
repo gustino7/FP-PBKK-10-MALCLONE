@@ -9,14 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('anime');
+        Schema::dropIfExists('user_anime');
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('remember_token')->nullable();
+            $table->timestamps();
         });
 
         Schema::create('anime', function (Blueprint $table) {
@@ -25,6 +30,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->float('rating')->nullable();
+            $table->timestamps();
         });
 
         Schema::create('user_anime', function (Blueprint $table) {
@@ -45,6 +51,5 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_anime_tables');
     }
 };
