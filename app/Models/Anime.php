@@ -17,4 +17,5 @@ class Anime extends Model
         'cover_image',
         'rating'
     ];
+
 }
