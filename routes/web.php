@@ -28,4 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+// foreach (scandir($path = app_path('Modules')) as $dir) {
+//     if (file_exists($filepath = "{$path}/{$dir}/Presentation/routes/web.php")) {
+//         require $filepath;
+//     }
+// }
