@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Staff extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "name",
+        "birthday",
+        "description",
+        "position_staff_id"
+    ];
+
+    public function Anime_Staff(){
+        return $this->hasMany(Anime_Staff::class);
+    }
+
+    public function Position_Staff(){
+        return $this->belongsTo(Position_Staff::class);
+    }
 }
