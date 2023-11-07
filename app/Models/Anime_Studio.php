@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Anime_Studio extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "anime_id",
+        "studio_id",
+    ];
+
+    public function Anime(){
+        return $this->belongsTo(Anime::class);
+    }
+
+    public function Studio(){
+        return $this->belongsTo(Studio::class);
+    }
 }

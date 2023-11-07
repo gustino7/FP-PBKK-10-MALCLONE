@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('comment')->nullable(false);
             $table->string('feelings')->nullable(false);
             $table->integer('likes')->default(0);
+            $table->decimal('rating')->default(0);
+            $table->string('status')->default('watching'); //watching, completed, plan to watch
 
             $table->uuid('user_id')->nullable(false);
             $table->unsignedBigInteger('anime_id')->nullable(false);
