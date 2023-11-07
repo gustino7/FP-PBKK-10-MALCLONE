@@ -91,11 +91,15 @@
             </div>
         </div>
     </div>
+    <div class="hidden space-x-8 sm:flex max-w-custom mx-auto px-3 sm:px-3 lg:px-3 py-2 bg-mal-blue">
+        <x-nav-link :href="route('anime')" :active="request()->routeIs('anime')" class="text-white font-black">
+            {{ __('Anime') }}
+        </x-nav-link>
 
-    <div class="hidden space-x-8 sm:flex max-w-custom mx-auto px-6 sm:px-6 lg:px-8 py-2 bg-mal-blue">
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
-            {{ __('Dashboard') }}
+        <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black">
+            {{ __('Community') }}
         </x-nav-link>
     </div>
+
 
 </nav>
