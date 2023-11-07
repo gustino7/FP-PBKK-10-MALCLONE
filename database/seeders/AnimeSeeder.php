@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Anime;
+use Database\Factories\AnimeFactory;
 
 class AnimeSeeder extends Seeder
 {
@@ -13,6 +14,5 @@ class AnimeSeeder extends Seeder
      */
     public function run(): void
     {
-        Anime::factory()->count(5)->create();
     }
 }
