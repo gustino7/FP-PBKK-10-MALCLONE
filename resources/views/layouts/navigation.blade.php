@@ -92,8 +92,12 @@
         </div>
     </div>
     <div class="hidden space-x-8 sm:flex max-w-custom mx-auto px-3 sm:px-3 lg:px-3 py-2 bg-mal-blue">
-        <x-nav-link :href="route('anime')" :active="request()->routeIs('anime')" class="text-white font-black">
-            {{ __('Anime') }}
+        <x-nav-link :href="route('topanime')" :active="request()->routeIs('topanime')" class="text-white font-black">
+            {{ __('Top Anime') }}
+        </x-nav-link>
+
+        <x-nav-link :href="route('seasonalanime')" :active="request()->routeIs('seasonalanime')" class="text-white font-black">
+            {{ __('Seasonal Anime') }}
         </x-nav-link>
 
         <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black">
