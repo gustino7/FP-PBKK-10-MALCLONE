@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnimeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +24,29 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/anime', function () {
+    return view('anime');
+})->middleware(['auth', 'verified'])->name('anime');
+
+Route::get('/searchanime', function () {
+    return view('searchanime');
+})->middleware(['auth', 'verified'])->name('searchanime');
+
+Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
+
+Route::get('/seasonalanime', function () {
+    return view('seasonalanime');
+})->middleware(['auth', 'verified'])->name('seasonalanime');
+
+Route::get('/community', function () {
+    return view('community');
+})->middleware(['auth', 'verified'])->name('community');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

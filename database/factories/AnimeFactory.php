@@ -17,10 +17,14 @@ class AnimeFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(),
-            'description' => $this->faker->text(500),
-            'cover_image' => $this->faker->imageUrl(),
-            'rating' => $this->faker->randomFloat(1, 1, 10),
+            'title' => $this->faker->sentence,
+            'rating' => $this->faker->randomFloat(2, 0, 10),
+            'synopsis' => $this->faker->paragraph,
+            'poster' => $this->faker->imageUrl(300, 400),
+            'type' => $this->faker->randomElement(['TV', 'Movie', 'OVA']),
+            'episode' => $this->faker->numberBetween(1, 100),
+            'status' => $this->faker->randomElement(['Airing', 'Finished', 'Not Yet Aired']),
+            'premiered' => $this->faker->date,
         ];
     }
 }
