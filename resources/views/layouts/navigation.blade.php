@@ -30,7 +30,7 @@
 
                             <!-- User Profile Picture -->
                             <div class="ml-1">
-                                <img src="{{ Auth::user()->profile_picture_url }}" alt="Profile Picture" class="w-8 h-8 rounded">
+                                <img src="{{ asset('storage/'.Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-8 h-8 rounded">
                             </div>
                         </button>
                     </x-slot>

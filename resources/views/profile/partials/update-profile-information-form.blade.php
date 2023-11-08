@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -56,11 +56,12 @@
 
         <div>
             <x-input-label for="profile_picture" :value="__('Profile Picture')" />
+            <img src="{{ asset('storage/'.$user->profile_picture) }}" alt="Profile Picture" style="width: 300px; height: 300px;">
             <input id="profile_picture" name="profile_picture" type="file" class="mt-1 block w-full" accept="image/*">
             <x-input-error class="mt-2" :messages="$errors->get('profile_picture')" />
         </div>
 
-
+        <!-- Wallpaper -->
         <div>
             <x-input-label for="wallpaper" :value="__('Wallpaper')" />
             <input id="wallpaper" name="wallpaper" type="file" class="mt-1 block w-full" accept="image/*">
