@@ -7,8 +7,11 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         <div class="bg-white p-6 shadow sm:rounded-lg">
+            @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
+            <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="w-48 h-72 object-cover rounded-md float-left mr-4">
+            @else
             <img src="{{ asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="w-48 h-72 object-cover rounded-md float-left mr-4">
-
+            @endif
             <p class="text-gray-700">
                 <strong>Synopsis:</strong>
             </p>

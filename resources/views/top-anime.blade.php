@@ -45,7 +45,7 @@
                                     </div>
                                 </td>
 
-                                <td class="px-4 py-2 border-b border-r text-center">{{ $anime->rating }}</td>
+                                <td class="px-4 py-2 border-b border-r text-center">{{ $anime->avg_rating }}</td>
                                 <td class="px-4 py-2 border-b border-r text-center">{{ $anime->your_score }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $anime->status }}</td>
                             </tr>

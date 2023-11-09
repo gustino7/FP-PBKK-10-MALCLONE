@@ -18,7 +18,7 @@ class AnimeFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'rating' => $this->faker->randomFloat(2, 0, 10),
+            'avg_rating' => $this->faker->randomFloat(2, 0, 10),
             'synopsis' => $this->faker->paragraph,
             'poster' => $this->faker->imageUrl(300, 400),
             'type' => $this->faker->randomElement(['TV', 'Movie', 'OVA']),
