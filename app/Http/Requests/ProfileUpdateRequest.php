@@ -17,7 +17,10 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Max file size is 2MB
+            'description' => ['nullable', 'string', 'max:255'],
+            'wallpaper' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Max file size is 2MB
         ];
     }
 }
