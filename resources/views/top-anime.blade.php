@@ -27,8 +27,13 @@
                                     <div class="flex mt-1">
                                         <div class="mr-4">
                                             <a href="{{ route('anime.show', ['id' => $anime->id]) }}">
+                                                @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
                                                 <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="mt-1 w-13 h-20 object-cover rounded">
+                                                @else
+                                                <img src="{{ asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="mt-1 w-13 h-20 object-cover rounded">
+                                                @endif
                                             </a>
+
                                         </div>
                                         <div>
                                             <h2 class="text-lg font-semibold text-link-blue">

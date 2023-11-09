@@ -32,6 +32,8 @@ Route::get('/searchanime', function () {
 })->middleware(['auth', 'verified'])->name('searchanime');
 
 Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
+Route::get('/anime/create', [AnimeController::class, 'create'])->name('anime.create');
+Route::post('/anime', [AnimeController::class, 'store'])->name('anime.store');
 Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
 
 Route::get('/seasonalanime', function () {

@@ -40,6 +40,9 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('anime.create')">
+                            {{ __('Create Anime') }}
+                        </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -86,6 +89,9 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
+                <x-responsive-nav-link :href="route('anime.create')">
+                    {{ __('Create Anime') }}
+                </x-responsive-nav-link>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -95,6 +101,8 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+
+
             </div>
         </div>
     </div>
