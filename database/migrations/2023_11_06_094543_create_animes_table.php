@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->decimal('rating')->default(0);
+            $table->decimal('avg_rating')->default(0);
             $table->text('synopsis');
             $table->string('poster');
             $table->string('type');
