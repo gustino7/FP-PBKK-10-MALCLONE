@@ -32,6 +32,7 @@ Route::get('/searchanime', function () {
 })->middleware(['auth', 'verified'])->name('searchanime');
 
 Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
+Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
 
 Route::get('/seasonalanime', function () {
     return view('seasonalanime');

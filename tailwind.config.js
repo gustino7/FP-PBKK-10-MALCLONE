@@ -16,7 +16,7 @@ export default {
             },
             colors: {
                 'mal-blue': '#2F52A2',
-                
+                'link-blue': '#007BFF',
             },
             maxWidth: {
                 'custom': '75.5rem', // 86rem is 528px, which is in between 6xl and 7xl

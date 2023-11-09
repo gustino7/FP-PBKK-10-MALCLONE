@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th class="px-4 py-2 border-b border-r text-center">Rank</th>
-                                <th class="px-4 py-2 border-b border-r text-left">Title</th>
+                                <th class="px-4 py-2 border-b border-r text-center">Title</th>
                                 <th class="px-4 py-2 border-b border-r text-center">Score</th>
                                 <th class="px-4 py-2 border-b border-r text-center">Your Score</th>
                                 <th class="px-4 py-2 border-b">Status</th>
@@ -24,17 +24,22 @@
                             <tr>
                                 <td class="px-4 py-2 border-b border-r text-center">{{ $loop->index + 1 }}</td>
                                 <td class="px-4 py-2 border-b border-r text-left">
-                                    <div class="flex items-center">
+                                    <div class="flex mt-1">
                                         <div class="mr-4">
-                                            <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="w-20 h-32 object-cover rounded">
+                                            <a href="{{ route('anime.show', ['id' => $anime->id]) }}">
+                                                <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="mt-1 w-13 h-20 object-cover rounded">
+                                            </a>
                                         </div>
                                         <div>
-                                            <h2 class="text-lg font-semibold">{{ $anime->title }}</h2>
+                                            <h2 class="text-lg font-semibold text-link-blue">
+                                                <a href="{{ route('anime.show', ['id' => $anime->id]) }}">{{ $anime->title }}</a>
+                                            </h2>
                                             <p class="text-sm text-gray-600">{{ $anime->type }} ({{ $anime->episode }} episodes)</p>
                                             <p class="text-sm text-gray-600">Premiered: {{ $anime->premiered }}</p>
                                         </div>
                                     </div>
                                 </td>
+
                                 <td class="px-4 py-2 border-b border-r text-center">{{ $anime->rating }}</td>
                                 <td class="px-4 py-2 border-b border-r text-center">{{ $anime->your_score }}</td>
                                 <td class="px-4 py-2 border-b text-center">{{ $anime->status }}</td>

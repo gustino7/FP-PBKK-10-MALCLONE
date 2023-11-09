@@ -14,4 +14,10 @@ class AnimeController extends Controller
 
         return view('top-anime', compact('topAnimes'));
     }
+
+    public function show($id)
+    {
+        $anime = Anime::find($id);
+        return view('anime.show', ['anime' => $anime]);
+    }
 }
