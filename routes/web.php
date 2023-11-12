@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/anime', function () {
     return view('anime');

@@ -52,6 +52,15 @@ class AnimeController extends Controller
         return redirect()->route('dashboard');
     }
 
+    public function getAllDashboard(){
+        return view('dashboard')->with([
+            'animes_tv' => Anime::where('type', 'TV')->get(),
+            'animes_latest' => Anime::orderBy('updated_at','desc')->get(),
+            'animes_upcoming' => Anime::where('status', 'Not Yet Aired')->take(5)->get(),
+            'animes_top' => Anime::orderBy('avg_rating', 'desc')->take(5)->get()
+        ]);
+    }
+
     public function create()
     {
         return view('anime.create');
