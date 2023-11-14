@@ -32,14 +32,15 @@
             </div>
 
             <div class="w-full ms-5">
-                <div class="font-bold border border-gray-300 p-2 mb-4 flex">
+                <div class="font-bold border border-gray-300 p-2 mb-4 flex items-center">
                     <div class="w-1/8">
                         <div class="my-3 border-mal-blue pl-4">
                             <p class="text-lg font-semibold text-mal-blue">SCORE</p>
                             <p class="text-3xl">{{ $anime->avg_rating }}</p>
                         </div>
                     </div>
-                    <div class="w-1/2 ms-3">
+                    <div class="border-r border-gray-300 h-16 ms-4"></div>
+                    <div class="w-1/2">
                         <div class="my-3 pl-4">
                             <p class="text-lg text-black mb-4">
                                 <span class="font-medium">Ranked :</span>
@@ -85,6 +86,7 @@
                 <p class="text-black">
                     <strong>Synopsis</strong>
                 </p>
+                <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
                 <div>
                     {{ $anime->synopsis }}
                 </div>
