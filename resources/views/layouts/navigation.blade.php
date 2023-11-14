@@ -111,9 +111,10 @@
             {{ __('Top Anime') }}
         </x-nav-link>
 
-        <x-nav-link :href="route('seasonalanime')" :active="request()->routeIs('seasonalanime')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
+        <x-nav-link :href="route('anime.season', ['year' => 2023, 'season' => 'fall'])" :active="request()->routeIs('anime.season')" class="text-white font-black hover:text-black hover:bg-gray-300">
             {{ __('Seasonal Anime') }}
         </x-nav-link>
+
 
         <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
             {{ __('Community') }}

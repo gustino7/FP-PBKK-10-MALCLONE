@@ -80,4 +80,72 @@ class AnimeController extends Controller
     {
         return view('anime.create');
     }
+
+    public function seasonalAnime($year, $season)
+    {
+        // Define the array of seasons
+        $seasonsArray = ['winter', 'spring', 'summer', 'fall'];
+    
+        // Determine the start and end months for the selected season
+        $startMonth = $this->getStartMonth($season);
+        $endMonth = $this->getEndMonth($season);
+    
+        // Fetch anime for the selected season and year
+        $seasonalAnimes = Anime::whereYear('premiered', $year)
+            ->whereMonth('premiered', '>=', $startMonth)
+            ->whereMonth('premiered', '<=', $endMonth)
+            ->get();
+    
+        // Calculate previous and next year and season
+        $prevYear = $year - 1;
+        $nextYear = $year + 1;
+    
+        $prevSeason = ($season == 'winter') ? 'fall' : $seasonsArray[array_search($season, $seasonsArray) - 1];
+        $nextSeason = ($season == 'fall') ? 'winter' : $seasonsArray[array_search($season, $seasonsArray) + 1];
+    
+        // Generate the array of seasons
+        $seasons = [];
+        foreach ($seasonsArray as $seasonItem) {
+            $seasons[] = [
+                'year' => ($seasonItem == 'winter' && $season == 'winter') ? $prevYear : $year,
+                'season' => $seasonItem,
+                'label' => ucfirst($seasonItem) . ' ' . (($seasonItem == 'winter' && $season == 'winter') ? $prevYear : $year),
+            ];
+        }
+    
+        // Pass the data to the view
+        return view('seasonal-anime', compact('seasonalAnimes', 'season', 'year', 'prevYear', 'nextYear', 'prevSeason', 'nextSeason', 'seasons'));
+    }
+
+    private function getStartMonth($season)
+    {
+        switch ($season) {
+            case 'winter':
+                return 1; // January
+            case 'spring':
+                return 4; // April
+            case 'summer':
+                return 7; // July
+            case 'fall':
+                return 10; // October
+            default:
+                return 1; // January by default
+        }
+    }
+
+    private function getEndMonth($season)
+    {
+        switch ($season) {
+            case 'winter':
+                return 3; // March
+            case 'spring':
+                return 6; // June
+            case 'summer':
+                return 9; // September
+            case 'fall':
+                return 12; // December
+            default:
+                return 12; // December by default
+        }
+    }
 }

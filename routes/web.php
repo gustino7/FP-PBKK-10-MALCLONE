@@ -36,9 +36,11 @@ Route::get('/anime/create', [AnimeController::class, 'create'])->name('anime.cre
 Route::post('/anime', [AnimeController::class, 'store'])->name('anime.store');
 Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
 
-Route::get('/seasonalanime', function () {
-    return view('seasonalanime');
-})->middleware(['auth', 'verified'])->name('seasonalanime');
+Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])
+    ->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])
+    ->name('anime.season');
+
+
 
 Route::get('/community', function () {
     return view('community');
