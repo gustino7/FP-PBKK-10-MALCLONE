@@ -16,13 +16,13 @@
             <div class="flex-1">
                 <div class="font-bold border border-gray-300 p-2 mb-4 flex">
                     <div class="w-1/7">
-                        <div class="my-4 border-mal-blue pl-4">
+                        <div class="my-3 border-mal-blue pl-4">
                             <p class="tet-center text-lg font-semibold text-mal-blue">SCORE</p>
                             <p class="text-center text-3xl">{{ $anime->avg_rating }}</p>
                         </div>
                     </div>
                     <div class="w-1/4 ms-3">
-                        <div class="my-4 pl-4">
+                        <div class="my-3 pl-4">
                             <p class="text-lg text-black mb-4">
                                 <span class="font-medium">Ranked :</span>
                                 <span class="font-bold">#{{ $rank + 1 }}</span>
@@ -33,17 +33,35 @@
                 </div>
             </div>
             <div class="flex-1">
-                <div class="font-bold border border-gray-300 p-2 mb-4 flex">
+                <div class="font-medium border border-gray-300 p-2 mb-4 flex">
                     <div class="w-1/7">
-                        <div class="my-4 border-mal-blue pl-4">
-                            <p class="text-md">
-                                <select class="border rounded px-2 py-1">
-                                    <option value="watching">Add to List</option>
+                        <div class="my-1 border-mal-blue pl-4">
+                            <p class="text-m">
+                                <select class="border rounded px-2 py-1 me-3">
+                                    <option value="add-to-list">Add to List</option>
                                     <option value="watching">Watching</option>
                                     <option value="completed">Completed</option>
                                     <option value="on-hold">On-Hold</option>
                                     <option value="dropped">Dropped</option>
                                     <option value="plan-to-watch">Plan to Watch</option>
+                                </select>
+                                <select class="border rounded px-2 py-1 me-3 w-40">
+                                    <option value="10">(10) Masterpiece</option>
+                                    <option value="9">(9) Great</option>
+                                    <option value="8">(8) Very Good</option>
+                                    <option value="7">(7) Good</option>
+                                    <option value="6">(6) Fine</option>
+                                    <option value="5">(5) Average</option>
+                                    <option value="4">(4) Bad</option>
+                                    <option value="3">(3) Very Bad</option>
+                                    <option value="2">(2) Horrible</option>
+                                    <option value="1">(1) Appalling</option>
+                                </select>
+                                <span class="font-normal"></span>
+                                <select class="border rounded px-2 py-1 w-40">
+                                    @for ($i = 0; $i <= $anime->episode; $i++)
+                                        <option value="{{ $i }}">Episode: {{ $i }} / {{$anime->episode}}</option>
+                                        @endfor
                                 </select>
                             </p>
                         </div>
