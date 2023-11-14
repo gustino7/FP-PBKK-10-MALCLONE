@@ -34,14 +34,15 @@ class AnimeFactory extends Factory
         $year = $carbonDate->year;
         $month = $carbonDate->month;
 
-        if ($month >= 1 && $month <= 4) {
+        if ($month >= 1 && $month <= 3) {
             return "Winter $year";
-        } elseif ($month >= 5 && $month <= 8) {
+        } elseif ($month >= 4 && $month <= 6) {
             return "Spring $year";
-        } elseif ($month >= 9 && $month <= 12) {
+        } elseif ($month >= 7 && $month <= 9) {
             return "Summer $year";
+        } elseif ($month >= 10 && $month <= 12) {
+            return "Fall $year";
         } else {
-            // Handle an invalid month (this is just an example, you may want to adjust it based on your needs)
             return "Unknown Season";
         }
     }
