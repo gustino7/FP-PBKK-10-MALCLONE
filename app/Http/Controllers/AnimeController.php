@@ -18,8 +18,12 @@ class AnimeController extends Controller
 
     public function show($id)
     {
-        $anime = Anime::find($id);
-        return view('anime.show', ['anime' => $anime]);
+        $anime = Anime::findOrFail($id);
+
+        // Get the ranking by ordering animes by avg_rating
+        $rank = Anime::orderByDesc('avg_rating')->pluck('id')->search($anime->id);
+
+        return view('anime.show', compact('anime', 'rank'));
     }
 
     public function store(Request $request)
