@@ -42,6 +42,25 @@ class AnimeController extends Controller
         $imageName = Str::random(20) . '.' . $request->file('poster')->getClientOriginalExtension();
         $request->file('poster')->storeAs('posters', $imageName, 'public');
 
+        // Extract year and month from premiered date
+        $premieredYear = date('Y', strtotime($request->premiered));
+        $premieredMonth = date('m', strtotime($request->premiered));
+
+        // Determine the season based on the month
+        $season = '';
+        if ($premieredMonth >= 1 && $premieredMonth <= 3) {
+            $season = 'Winter';
+        } elseif ($premieredMonth >= 4 && $premieredMonth <= 6) {
+            $season = 'Spring';
+        } elseif ($premieredMonth >= 7 && $premieredMonth <= 9) {
+            $season = 'Summer';
+        } elseif ($premieredMonth >= 10 && $premieredMonth <= 12) {
+            $season = 'Fall';
+        }
+
+        // Concatenate the season and year
+        $seasonYear = $season . ' ' . $premieredYear;
+
         // Create the anime record
         Anime::create([
             'title' => $request->title,
@@ -50,7 +69,8 @@ class AnimeController extends Controller
             'episode' => $request->episode,
             'status' => $request->status,
             'premiered' => $request->premiered,
-            'poster' => $imageName, // Store the image filename in the database
+            'season' => $seasonYear, // Save the season and year
+            'poster' => $imageName,
         ]);
 
         return redirect()->route('dashboard');
