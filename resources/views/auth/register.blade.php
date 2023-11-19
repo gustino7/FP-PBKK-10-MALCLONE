@@ -7,7 +7,7 @@
             <!-- Name -->
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2 text-mal-blue" for="name">
-                    Name
+                    Username
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="Name">
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
