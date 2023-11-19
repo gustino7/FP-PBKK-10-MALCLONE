@@ -1,13 +1,19 @@
 <div class="my-[1rem]" draggable="false">
     <div class="border-b border-black mb-2">
-        <a href="#"><h1>{{ $title }}</h1></a>
+        <a href="#">
+            <h1>{{ $title }}</h1>
+        </a>
     </div>
     <div class="min-w-[328.71px] cursor-pointer relative group">
         <div class="flex flex-row gap-x-2 carousel{{ $idn }} snap-center scroll-smooth overflow-hidden">
             @foreach($animes as $anime)
-                <div class="card{{ $idn }} max-w-[9rem] min-w-[9rem] h-[12.75rem] hover:opacity-80" draggable="false">
-                    <img src="storage/posters/{{ $anime->poster }}" alt="anime" class="h-full">
-                </div>
+            <div class="card{{ $idn }} max-w-[9rem] min-w-[9rem] h-[12.75rem] hover:opacity-80" draggable="false">
+                @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
+                <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="h-full">
+                @else
+                <img src="storage/posters/{{ $anime->poster }}" alt="anime" class="h-full">
+                @endif
+            </div>
             @endforeach
         </div>
         <div id="leftArrow{{ $idn }}" class="arrow{{ $idn }} hidden group-hover:block absolute top-[25%] -translate-x-0 -translate-y-[-50%] left-2 text-2xl rounded-xl p-2 bg-black/50 text-white cursor-pointer" draggable="false">
@@ -24,13 +30,45 @@
 </div>
 
 <script>
-    const carousel_{{ $idn }} = document.querySelector(".carousel{{ $idn }}");
-    const arrowBtns_{{ $idn }} = document.querySelectorAll(".arrow{{ $idn }}");
-    const scrollHorizontal_{{ $idn }} = (carousel_{{ $idn }}.querySelector(".card{{ $idn }}").offsetWidth)*5;
+    const carousel_ {
+        {
+            $idn
+        }
+    } = document.querySelector(".carousel{{ $idn }}");
+    const arrowBtns_ {
+        {
+            $idn
+        }
+    } = document.querySelectorAll(".arrow{{ $idn }}");
+    const scrollHorizontal_ {
+        {
+            $idn
+        }
+    } = (carousel_ {
+        {
+            $idn
+        }
+    }.querySelector(".card{{ $idn }}").offsetWidth) * 5;
 
-    arrowBtns_{{ $idn }}.forEach(btn => {
+    arrowBtns_ {
+        {
+            $idn
+        }
+    }.forEach(btn => {
         btn.addEventListener("click", () => {
-            carousel_{{ $idn }}.scrollLeft += btn.id === "leftArrow{{ $idn }}" ? -scrollHorizontal_{{ $idn }} : scrollHorizontal_{{ $idn }};
+            carousel_ {
+                {
+                    $idn
+                }
+            }.scrollLeft += btn.id === "leftArrow{{ $idn }}" ? -scrollHorizontal_ {
+                {
+                    $idn
+                }
+            } : scrollHorizontal_ {
+                {
+                    $idn
+                }
+            };
         })
     });
 </script>

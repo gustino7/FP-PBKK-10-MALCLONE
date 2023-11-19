@@ -12,9 +12,9 @@
                 <div class="border-b border-black">
                     <h1><a href="#">Latest Review</a></h1>
                 </div>
-                @for($i = 1; $i <= 2; $i++)
-                    <x-latest-review img="storage/profile_pictures/frieren.jpg" title="Frieren" user="ryanw531"/>
-                    <x-latest-review img="storage/profile_pictures/sao.jpg" title="Sword Art Online" user="Nohexz881"/>
+                @for($i = 1; $i
+                <= 2; $i++) <x-latest-review img="storage/profile_pictures/frieren.jpg" title="Frieren" user="ryanw531" />
+                <x-latest-review img="storage/profile_pictures/sao.jpg" title="Sword Art Online" user="Nohexz881" />
                 @endfor
             </div>
             <div class="flex flex-col w-[35%] mx-auto">
@@ -24,8 +24,9 @@
                     </div>
                     <div class="flex flex-col bg-slate-100">
                         @foreach($animes_upcoming as $anime)
-                            <x-recomend-side num="{{ $loop -> iteration }}" img="storage/posters/{{ $anime->poster }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->type }}" rating="{{ $anime->avg_rating }}" />
+                        <x-recomend-side num="{{ $loop->iteration }}" img="{{ filter_var($anime->poster, FILTER_VALIDATE_URL) ? $anime->poster : asset('storage/posters/' . $anime->poster) }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->type }}" rating="{{ $anime->avg_rating }}" />
                         @endforeach
+
                     </div>
                 </div>
                 <div class="my-[1rem] h-fit">
@@ -34,13 +35,13 @@
                     </div>
                     <div class="flex flex-col bg-slate-100">
                         @foreach($animes_top as $anime)
-                            <x-recomend-side num="{{ $loop -> iteration }}" img="storage/posters/{{ $anime->poster }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->episode }}" rating="{{ $anime->avg_rating }}" />
+                        <x-recomend-side num="{{ $loop->iteration }}" img="{{ filter_var($anime->poster, FILTER_VALIDATE_URL) ? $anime->poster : asset('storage/posters/' . $anime->poster) }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->type }}" rating="{{ $anime->avg_rating }}" />
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </x-slot>
 
 </x-app-layout>
