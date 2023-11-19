@@ -16,30 +16,37 @@ class Anime extends Model
         "type",
         "episode",
         "status",
-        "premiered"
+        "premiered",
+        "season"
     ];
 
-    public function Song(){
+    public function Song()
+    {
         return $this->hasMany(Song::class);
     }
 
-    public function User_Anime(){
+    public function User_Anime()
+    {
         return $this->hasMany(User_Anime::class);
     }
 
-    public function Anime_Character(){
+    public function Anime_Character()
+    {
         return $this->hasMany(Anime_Character::class);
     }
 
-    public function Anime_Genre(){
+    public function Anime_Genre()
+    {
         return $this->hasMany(Anime_Genre::class);
     }
 
-    public function Anime_Staff(){
+    public function Anime_Staff()
+    {
         return $this->hasMany(Anime_Staff::class);
     }
 
-    public function Anime_Studio(){
+    public function Anime_Studio()
+    {
         return $this->hasMany(Anime_Studio::class);
     }
 }
