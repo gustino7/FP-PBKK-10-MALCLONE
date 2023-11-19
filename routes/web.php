@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,8 +40,6 @@ Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAn
     ->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])
     ->name('anime.season');
 
-
-
 Route::get('/community', function () {
     return view('community');
 })->middleware(['auth', 'verified'])->name('community');
@@ -53,6 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/upload-profile-picture', [ProfileController::class, 'uploadProfilePicture'])->name('upload.profile_picture');
 });
+
+Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
 
 Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 
