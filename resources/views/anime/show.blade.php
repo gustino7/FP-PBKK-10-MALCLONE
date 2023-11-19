@@ -90,6 +90,14 @@
                 <div>
                     {{ $anime->synopsis }}
                 </div>
+
+                <p class="text-black mt-6">
+                    <strong>Characters & Voice Actors</strong>
+                </p>
+                <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+                <div>
+                    {{ $anime->synopsis }}
+                </div>
             </div>
         </div>
     </div>
