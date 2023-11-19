@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h4 class="font-semibold text-lg text-gray-800 leading-3">
-            {{ $user->name }}
+            {{ $user->name }}'s Profile
         </h4>
     </x-slot>
 
