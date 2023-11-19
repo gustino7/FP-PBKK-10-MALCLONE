@@ -8,7 +8,7 @@
             <h1 class="text-blue-400 hover:underline"><a href="#">{{ $title }}</a></h1>
         </div>
         <div>
-            <h1 class="text-sm">{{ $type }}, {{ $episode }}, scored {{ $rating }}</h1>
+            <h1 class="text-sm">{{ $episode }}, scored {{ $rating }}</h1>
         </div>
     </div>
 </div>
