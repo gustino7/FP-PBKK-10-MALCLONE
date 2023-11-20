@@ -24,8 +24,7 @@ class AnimeController extends Controller
         $user = Auth::user();
         
         // Average rating for anime from review
-        $avg_rating = Review::where('anime_id', $anime->id)->avg('rating');
-        $anime->avg_rating = number_format($avg_rating,2);
+        $anime->avg_rating = number_format($anime->avg_rating,2);
         
         // Get the ranking by ordering animes by avg_rating
         $rank = Anime::orderByDesc('avg_rating')->pluck('id')->search($anime->id);
