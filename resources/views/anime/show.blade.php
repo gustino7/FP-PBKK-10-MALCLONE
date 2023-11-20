@@ -31,7 +31,7 @@
                                 <div class="text-sm">
                                     <label for="status" class="">Status :</label>
                                 </div>
-                                <select name="status" id="status" class="w-[55%] text-xs h-[1.75rem] p-1">
+                                <select name="status" id="status" class="w-[57.5%] text-xs h-[1.75rem] p-1">
                                     @foreach(['Watching', 'Completed', 'On-hold', 'Dropped', 'Plan-to-watch'] as $option)
                                     <option value="{{ $option }}" @if($review->status == $option) selected @endif>
                                         {{ $option }}
@@ -45,7 +45,7 @@
                                 <div class="text-sm">
                                     <label for="rating">Your Score :</label>
                                 </div>
-                                <select name="rating" id="rating" class="w-[55%] text-xs h-[1.75rem] p-1">
+                                <select name="rating" id="rating" class="w-[57.5%] text-xs h-[1.75rem] p-1">
                                     @for ($i = 10; $i >= 1; $i--)
                                     <option value="{{ $i }}" @if ($review->rating == $i) selected @endif>
                                         ({{ $i }})
