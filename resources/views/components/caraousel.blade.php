@@ -30,45 +30,13 @@
 </div>
 
 <script>
-    const carousel_ {
-        {
-            $idn
-        }
-    } = document.querySelector(".carousel{{ $idn }}");
-    const arrowBtns_ {
-        {
-            $idn
-        }
-    } = document.querySelectorAll(".arrow{{ $idn }}");
-    const scrollHorizontal_ {
-        {
-            $idn
-        }
-    } = (carousel_ {
-        {
-            $idn
-        }
-    }.querySelector(".card{{ $idn }}").offsetWidth) * 5;
+    const carousel_{{ $idn }} = document.querySelector(".carousel{{ $idn }}");
+    const arrowBtns_{{ $idn }} = document.querySelectorAll(".arrow{{ $idn }}");
+    const scrollHorizontal_{{ $idn }} = (carousel_{{ $idn }}.querySelector(".card{{ $idn }}").offsetWidth)*5;
 
-    arrowBtns_ {
-        {
-            $idn
-        }
-    }.forEach(btn => {
+    arrowBtns_{{ $idn }}.forEach(btn => {
         btn.addEventListener("click", () => {
-            carousel_ {
-                {
-                    $idn
-                }
-            }.scrollLeft += btn.id === "leftArrow{{ $idn }}" ? -scrollHorizontal_ {
-                {
-                    $idn
-                }
-            } : scrollHorizontal_ {
-                {
-                    $idn
-                }
-            };
+            carousel_{{ $idn }}.scrollLeft += btn.id === "leftArrow{{ $idn }}" ? -scrollHorizontal_{{ $idn }} : scrollHorizontal_{{ $idn }};
         })
     });
 </script>

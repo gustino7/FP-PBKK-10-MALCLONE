@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
 use App\Models\Anime;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class AnimeController extends Controller
 {
@@ -19,11 +21,19 @@ class AnimeController extends Controller
     public function show($id)
     {
         $anime = Anime::findOrFail($id);
-
+        $user = Auth::user();
+        
+        // Average rating for anime from review
+        $avg_rating = Review::where('anime_id', $anime->id)->avg('rating');
+        $anime->avg_rating = number_format($avg_rating,2);
+        
         // Get the ranking by ordering animes by avg_rating
         $rank = Anime::orderByDesc('avg_rating')->pluck('id')->search($anime->id);
 
-        return view('anime.show', compact('anime', 'rank'));
+        // Edit status
+        $review_id = Review::where('user_id', $user->id)->where('anime_id', $anime->id)->value('id');
+        $review = Review::find($review_id);
+        return view('anime.show', compact('anime', 'rank', 'review', 'review_id'));
     }
 
     public function store(Request $request)
