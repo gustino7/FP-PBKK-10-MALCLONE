@@ -161,43 +161,75 @@
                     <table class="w-1/2 float-left">
                         <tbody>
                             @php
-                            $animeCharacters = $anime->Anime_Character->take(5);
+                            $characters = $anime->Anime_Character->sortBy('role')->take(10);
+                            $leftSide = $characters->slice(0, 5);
                             @endphp
-                            @foreach($animeCharacters as $index => $animeCharacter)
+                            @foreach($leftSide as $animeCharacter)
                             @php
                             $character = $animeCharacter->Character;
+                            $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
                             @endphp
-                            <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-[#F9F8F9]' }}">
-                                <td class="px-4 py-2">
-                                    <!-- Add image tag here using character's picture URL -->
-                                    <img src="{{ $character->picture_url }}" alt="{{ $character->name }}" class="w-12 h-12 object-cover rounded-full">
+                            <tr class="{{ $bgColor }}">
+                                <td class="">
+                                    @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
+                                    <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @else
+                                    <img src="{{ asset('storage/profile_pictures/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @endif
                                 </td>
-                                <td class="px-4 py-2">{{ $character->name }}</td>
+                                <td class="py-2 align-top">
+                                    <div class="ml-[-4rem]">
+                                        <p class="text-mal-blue">{{ $character->name }}</p>
+                                        <p class="text-xs">{{ $animeCharacter->role }}</p>
+                                    </div>
+                                </td>
+                            <tr>
+                                <td colspan="2">
+                                    <hr class="my-1 border-t-2 border-gray-100">
+                                </td>
+                            </tr>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="border-r border-gray-300 h-84 mx-2"></div> <!-- Vertical Line -->
+
+                    <div class="border-r border-gray-300 h-84 mx-2"></div>
+
                     <table class="w-1/2 float-left">
                         <tbody>
                             @php
-                            $remainingCharacters = $anime->Anime_Character->skip(5)->take(5);
+                            $rightSide = $characters->slice(5);
                             @endphp
-                            @foreach($remainingCharacters as $index => $animeCharacter)
+                            @foreach($rightSide as $animeCharacter)
                             @php
                             $character = $animeCharacter->Character;
+                            $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
                             @endphp
-                            <tr class="{{ $index % 2 == 1 ? 'bg-white' : 'bg-[#F9F8F9]' }}">
-                                <td class="px-4 py-2">
-                                    <!-- Add image tag here using character's picture URL -->
-                                    <img src="{{ $character->picture_url }}" alt="{{ $character->name }}" class="w-12 h-12 object-cover rounded-full">
+                            <tr class="{{ $bgColor }}">
+                                <td class="">
+                                    @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
+                                    <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @else
+                                    <img src="{{ asset('storage/profile_pictures/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @endif
                                 </td>
-                                <td class="px-4 py-2">{{ $character->name }}</td>
+                                <td class="py-2 align-top">
+                                    <div class="ml-[-1rem]">
+                                        <p class="text-mal-blue">{{ $character->name }}</p>
+                                        <p class="text-xs">{{ $animeCharacter->role }}</p>
+                                    </div>
+                                </td>
+                            <tr>
+                                <td colspan="2">
+                                    <hr class="my-1 border-t-2 border-gray-100">
+                                </td>
+                            </tr>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
 
                 {{-- Songs --}}
                 <div class="mt-4">

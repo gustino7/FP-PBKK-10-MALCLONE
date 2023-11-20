@@ -22,12 +22,17 @@ class CharacterController extends Controller
     {
         $request->validate([
             'character_id' => 'required|exists:characters,id',
+            'role' => 'required|in:Main,Supporting',
         ]);
 
         if (!$anime->Anime_Character->contains('character_id', $request->character_id)) {
             $anime->Anime_Character()->create([
                 'character_id' => $request->character_id,
+                'role' => $request->role,
             ]);
+
+            return redirect()->route('anime.show', ['id' => $anime->id])
+                ->with('success', 'Character added to anime successfully.');
         }
 
         return redirect()->route('anime.show', ['id' => $anime->id])

@@ -19,6 +19,7 @@ class CharacterFactory extends Factory
         return [
             'name' => $this->faker->name,
             'description' => $this->faker->sentence,
+            'profile_picture' => $this->faker->imageUrl(300, 400),
         ];
     }
 }

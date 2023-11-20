@@ -14,6 +14,7 @@ class Anime_Character extends Model
     protected $fillable = [
         "anime_id",
         "character_id",
+        "role",
     ];
 
     public function Anime(){
