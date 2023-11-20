@@ -15,74 +15,77 @@
                     <img src="{{ asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="w-full h-72 object-cover rounded-md mb-4">
                     @endif
                 </div>
-                
+
                 {{-- Edit Status --}}
                 @if ($review_id)
-                    <div class="flex flex-col">
-                        <div class="border-b-2 border-gray-600 mb-2">
-                            <h1 class=" text-gray-600 font-bold">Edit status</h1>
-                        </div>
-                        <div>
-                            <form action="{{ route('review.update', ['review_id' => $review_id, 'anime_id' => $anime->id]) }}" method="POST" class="flex flex-col justify-between gap-5">
-                                @csrf
-                                @method("PUT")
-                                <div class="flex flex-row items-center h-[1.5rem] justify-between">
-                                    <div class="text-xs">
-                                        <label for="status" class="">Status :</label>
-                                    </div>
-                                    <select name="status" id="status" class="w-[67.5%] text-xs">
-                                        @foreach(['Watching', 'Completed', 'On-hold', 'Dropped', 'Plan-to-watch'] as $option)
-                                            <option value="{{ $option }}" @if($review->status == $option) selected @endif>
-                                                {{ $option }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                
-                                <div class="flex flow-row items-center h-[1.5rem] justify-between">
-                                    <div class="text-xs">
-                                        <label for="status">Your Score :</label>
-                                    </div>
-                                    <select name="rating" id="rating" class="w-[67.5%] text-xs">
-                                        @for ($i = 10; $i >= 1; $i--)
-                                            <option value="{{ $i }}" @if ($review->rating == $i) selected @endif>
-                                                ({{ $i }}) 
-                                                @if ($i == 10)
-                                                    Masterpiece
-                                                @elseif ($i == 9)
-                                                    Great
-                                                @elseif ($i == 8)
-                                                    Very Good
-                                                @elseif ($i == 7)
-                                                    Good
-                                                @elseif ($i == 6)
-                                                    Fine
-                                                @elseif ($i == 5)
-                                                    Average
-                                                @elseif ($i == 4)
-                                                    Bad
-                                                @elseif ($i == 3)
-                                                    Very Bad
-                                                @elseif ($i == 2)
-                                                    Horrible
-                                                @else
-                                                    Appalling
-                                                @endif
-                                            </option>
-                                        @endfor
-                                    </select>
-                                </div>
-                                <div class="mx-auto w-20">
-                                    <button type="submit" class="bg-mal-blue text-white py-1 ml-1 rounded text-center text-xs font-bold w-full">Update</button>
-                                </div>
-                            </form>
-                        </div>
+                <div class="flex flex-col">
+                    <div class="my">
+                        <h1 class=" text-black font-bold">Edit status</h1>
                     </div>
+                    <hr class="mt-1 mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+                    <div>
+                        <form action="{{ route('review.update', ['review_id' => $review_id, 'anime_id' => $anime->id]) }}" method="POST" class="flex flex-col justify-between gap-5">
+                            @csrf
+                            @method("PUT")
+                            <div class="flex flex-row items-center h-[1.5rem] justify-between mt-2">
+                                <div class="text-sm">
+                                    <label for="status" class="">Status :</label>
+                                </div>
+                                <select name="status" id="status" class="w-[55%] text-xs h-[1.75rem] p-1">
+                                    @foreach(['Watching', 'Completed', 'On-hold', 'Dropped', 'Plan-to-watch'] as $option)
+                                    <option value="{{ $option }}" @if($review->status == $option) selected @endif>
+                                        {{ $option }}
+                                    </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+
+                            <div class="flex flex-row items-center h-[1.5rem] justify-between">
+                                <div class="text-sm">
+                                    <label for="rating">Your Score :</label>
+                                </div>
+                                <select name="rating" id="rating" class="w-[55%] text-xs h-[1.75rem] p-1">
+                                    @for ($i = 10; $i >= 1; $i--)
+                                    <option value="{{ $i }}" @if ($review->rating == $i) selected @endif>
+                                        ({{ $i }})
+                                        @if ($i == 10)
+                                        Masterpiece
+                                        @elseif ($i == 9)
+                                        Great
+                                        @elseif ($i == 8)
+                                        Very Good
+                                        @elseif ($i == 7)
+                                        Good
+                                        @elseif ($i == 6)
+                                        Fine
+                                        @elseif ($i == 5)
+                                        Average
+                                        @elseif ($i == 4)
+                                        Bad
+                                        @elseif ($i == 3)
+                                        Very Bad
+                                        @elseif ($i == 2)
+                                        Horrible
+                                        @else
+                                        Appalling
+                                        @endif
+                                    </option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="mx-auto w-full">
+                                <button type="submit" class="bg-mal-blue text-white py-1 rounded text-center text-xs font-bold w-full">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 @endif
-                
+
                 {{-- Information --}}
-                <div class="my-4 border-l-4 border-mal-blue pl-4">
-                    <p class="text-lg font-semibold text-black">Information</p>
+                <div class="my-4">
+                    <h1 class=" text-black font-bold">Information</h1>
+                    <hr class="mt-1 mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
                     <p class="text-gray-600">
                         <strong>Type:</strong> {{ $anime->type }}
                     </p>
@@ -100,7 +103,7 @@
 
             <div class="w-full ms-5 flex flex-col gap-4">
                 {{-- Score --}}
-                <div class="font-bold border border-gray-300 p-2 flex items-center">
+                <div class="font-bold border border-gray-300 p-2 flex items-center bg-[#F9F8F9]">
                     <div class="w-1/8">
                         <div class="my-3 border-mal-blue pl-4">
                             <p class="text-lg font-semibold text-mal-blue">SCORE</p>
@@ -119,7 +122,7 @@
                     </div>
                 </div>
                 {{-- Add To List --}}
-                <div class="font-medium border border-gray-300 p-2 flex">
+                <div class="font-medium border border-gray-300 p-2 flex bg-[#F9F8F9]">
                     <div class="w-full">
                         <div class="my-1 border-mal-blue pl-4">
                             <p class="text-m">
@@ -165,9 +168,9 @@
                     </h1>
                     <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
                     <div>
-                        <div class="bg-slate-300 flex flex-row justify-between px-8 h-8 items-center">
-                            <a href="{{ route('review.create', ['anime_id' => $anime->id, 'user_id' => Auth::user()->id ]) }}" class="text-violet-500 font-bold hover:underline">Write review</a>
-                            <a href="#" class="text-violet-500 font-bold hover:underline">All reviews</a>
+                        <div class="bg-[#F9F8F9] flex flex-row justify-between px-8 h-8 items-center ">
+                            <a href="{{ route('review.create', ['anime_id' => $anime->id, 'user_id' => Auth::user()->id ]) }}" class="text-mal-blue font-bold hover:underline">Write review</a>
+                            <a href="#" class="text-mal-blue font-bold hover:underline">All reviews</a>
                         </div>
                     </div>
                 </div>
