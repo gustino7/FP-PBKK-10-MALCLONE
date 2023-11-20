@@ -27,16 +27,24 @@
                                     ({{ $i }}) 
                                     @if ($i == 10)
                                         Masterpiece
-                                    @elseif ($i >= 8)
+                                    @elseif ($i == 9)
                                         Great
-                                    @elseif ($i >= 6)
+                                    @elseif ($i == 8)
                                         Very Good
-                                    @elseif ($i >= 4)
+                                    @elseif ($i == 7)
                                         Good
-                                    @elseif ($i >= 2)
+                                    @elseif ($i == 6)
                                         Fine
-                                    @else
+                                    @elseif ($i == 5)
                                         Average
+                                    @elseif ($i == 4)
+                                        Bad
+                                    @elseif ($i == 3)
+                                        Very Bad
+                                    @elseif ($i == 2)
+                                        Horrible
+                                    @else
+                                        Appalling
                                     @endif
                                 </option>
                             @endfor
