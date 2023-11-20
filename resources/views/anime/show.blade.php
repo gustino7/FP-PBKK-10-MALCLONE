@@ -75,7 +75,7 @@
                                 </select>
                             </div>
                             <div class="mx-auto w-full">
-                                <button type="submit" class="bg-mal-blue text-white py-1 rounded text-center text-xs font-bold w-full">Update</button>
+                                <button type="submit" class="bg-mal-blue text-white py-1 rounded text-center text-xs font-bold h-[1.75rem] w-full">Update</button>
                             </div>
                         </form>
                     </div>
@@ -110,14 +110,18 @@
                             <p class="text-3xl">{{ $anime->avg_rating }}</p>
                         </div>
                     </div>
-                    <div class="border-r border-gray-300 h-16 ms-4"></div>
+                    <div class="border-r border-gray-300 h-16 ms-4"></div> <!-- Vertical Line -->
                     <div class="w-1/2">
                         <div class="my-3 pl-4">
                             <p class="text-lg text-black mb-4">
                                 <span class="font-medium">Ranked :</span>
                                 <span class="font-bold">#{{ $rank + 1 }}</span>
                             </p>
-                            <p class="text-sm font-semibold text-link-blue">{{ $anime->type }}</p>
+                            <div class="flex items-center my-3">
+                                <p class="text-sm font-semibold text-link-blue">{{ $anime->season }}</p>
+                                <div class="border-r border-gray-300 h-4 mx-3"></div>
+                                <p class="text-sm font-semibold text-link-blue">{{ $anime->type }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -142,21 +146,66 @@
                     </div>
                 </div>
                 {{-- Character Voice Actor --}}
-                <div class="mt-4">
+                <div class="mt-4 flex justify-between">
                     <h1 class="text-black">
                         <strong>Characters and Voice Actors</strong>
                     </h1>
-                    <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
-                    <div>
-
+                    <div class="ml-auto">
+                        <a href="{{ route('anime.characters.create', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                            <strong class="text-sm">Edit</strong>
+                        </a>
                     </div>
                 </div>
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+                <div class="flex">
+                    <table class="w-1/2 float-left">
+                        <tbody>
+                            @php
+                            $animeCharacters = $anime->Anime_Character->take(5);
+                            @endphp
+                            @foreach($animeCharacters as $index => $animeCharacter)
+                            @php
+                            $character = $animeCharacter->Character;
+                            @endphp
+                            <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-[#F9F8F9]' }}">
+                                <td class="px-4 py-2">
+                                    <!-- Add image tag here using character's picture URL -->
+                                    <img src="{{ $character->picture_url }}" alt="{{ $character->name }}" class="w-12 h-12 object-cover rounded-full">
+                                </td>
+                                <td class="px-4 py-2">{{ $character->name }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="border-r border-gray-300 h-84 mx-2"></div> <!-- Vertical Line -->
+                    <table class="w-1/2 float-left">
+                        <tbody>
+                            @php
+                            $remainingCharacters = $anime->Anime_Character->skip(5)->take(5);
+                            @endphp
+                            @foreach($remainingCharacters as $index => $animeCharacter)
+                            @php
+                            $character = $animeCharacter->Character;
+                            @endphp
+                            <tr class="{{ $index % 2 == 1 ? 'bg-white' : 'bg-[#F9F8F9]' }}">
+                                <td class="px-4 py-2">
+                                    <!-- Add image tag here using character's picture URL -->
+                                    <img src="{{ $character->picture_url }}" alt="{{ $character->name }}" class="w-12 h-12 object-cover rounded-full">
+                                </td>
+                                <td class="px-4 py-2">{{ $character->name }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
                 {{-- Songs --}}
                 <div class="mt-4">
                     <h1 class="text-black">
                         <strong>Songs</strong>
                     </h1>
                     <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+
                     <div>
 
                     </div>
