@@ -123,31 +123,7 @@
                     <div class="w-full">
                         <div class="my-1 border-mal-blue pl-4">
                             <p class="text-m">
-                                <select class="border rounded px-2 py-1 me-3">
-                                    <option value="add-to-list">Add to List</option>
-                                    <option value="watching">Watching</option>
-                                    <option value="completed">Completed</option>
-                                    <option value="on-hold">On-Hold</option>
-                                    <option value="dropped">Dropped</option>
-                                    <option value="plan-to-watch">Plan to Watch</option>
-                                </select>
-                                <select class="border rounded px-2 py-1 me-3 w-40">
-                                    <option value="10">(10) Masterpiece</option>
-                                    <option value="9">(9) Great</option>
-                                    <option value="8">(8) Very Good</option>
-                                    <option value="7">(7) Good</option>
-                                    <option value="6">(6) Fine</option>
-                                    <option value="5">(5) Average</option>
-                                    <option value="4">(4) Bad</option>
-                                    <option value="3">(3) Very Bad</option>
-                                    <option value="2">(2) Horrible</option>
-                                    <option value="1">(1) Appalling</option>
-                                </select>
-                                <select class="border rounded px-2 py-1 w-40">
-                                    @for ($i = 0; $i <= $anime->episode; $i++)
-                                        <option value="{{ $i }}">Episode: {{ $i }} / {{$anime->episode}}</option>
-                                    @endfor
-                                </select>
+                                <button class="font-bold border rounded-lg px-2 py-1 me-3 bg-mal-blue text-white hover:opacity-70">Add To List</button>
                             </p>
                         </div>
                     </div>

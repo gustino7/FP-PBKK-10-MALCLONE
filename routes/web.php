@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::get('/anime', function () {
 //     return view('anime');
@@ -49,7 +47,7 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth','verified'])->group(function () {
-    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+    Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
     
     // REVIEW
     Route::get('/review/create/{anime_id}/{user_id}', [ReviewController::class, 'show'])->name('review.create');
@@ -75,6 +73,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/upload-profile-picture', [ProfileController::class, 'uploadProfilePicture'])->name('upload.profile_picture');
 });
+
+Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
 
 Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 
