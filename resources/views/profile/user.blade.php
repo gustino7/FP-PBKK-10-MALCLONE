@@ -11,7 +11,7 @@
                 @if ($user->profile_picture)
                 <img src="{{ asset('storage/'.$user->profile_picture) }}" alt="{{ $user->name }}" class="w-50 h-50 object-cover rounded-md mb-4">
                 @else
-                <!-- You can add a default profile picture here -->
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Default Profile Picture" class="w-50 h-50 object-cover rounded-md mb-4">
                 @endif
 
                 <div class="my-4 border-l-4 border-mal-blue pl-4">
@@ -24,7 +24,11 @@
 
             <div class="w-full ms-5">
                 <div class="h-16 overflow-hidden text-sm">
+                    @if ($user->description)
                     {{ $user->description }}
+                    @else
+                    This user hasn't set a description yet.
+                    @endif
                 </div>
                 <p class="text-black">
                     <strong>Statistics</strong>

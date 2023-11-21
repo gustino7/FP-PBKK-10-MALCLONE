@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
@@ -20,25 +21,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
-    
+
     // REVIEW
     Route::get('/review/create/{anime_id}/{user_id}', [ReviewController::class, 'show'])->name('review.create');
-    Route::post('/review/create', [ReviewController::class, 'create']) ->name('review.store');
-    Route::put('/review/update', [ReviewController::class,'update']) ->name('review.update');
-    
+    Route::post('/review/create', [ReviewController::class, 'create'])->name('review.store');
+    Route::put('/review/update', [ReviewController::class, 'update'])->name('review.update');
+
     // ANIME
-    Route::get('/anime', function () {return view('anime');})->name('anime');
-    Route::get('/searchanime', function () {return view('searchanime');})->name('searchanime');
+    Route::get('/anime', function () {
+        return view('anime');
+    })->name('anime');
+    Route::get('/searchanime', function () {
+        return view('searchanime');
+    })->name('searchanime');
     Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
     Route::get('/anime/create', [AnimeController::class, 'create'])->name('anime.create');
     Route::post('/anime', [AnimeController::class, 'store'])->name('anime.store');
     Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
-    
+
+    Route::get('/anime/{anime}/characters/create', [CharacterController::class, 'create'])->name('anime.characters.create');
+    Route::post('/anime/{anime}/characters', [CharacterController::class, 'store'])->name('anime.characters.store');
+
     // Community
-    Route::get('/community', function () {return view('community');})->name('community');
+    Route::get('/community', function () {
+        return view('community');
+    })->name('community');
 });
 
 Route::middleware('auth')->group(function () {
