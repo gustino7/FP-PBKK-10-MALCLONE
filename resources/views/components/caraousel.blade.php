@@ -8,11 +8,13 @@
         <div class="flex flex-row gap-x-2 carousel{{ $idn }} snap-center scroll-smooth overflow-hidden">
             @foreach($animes as $anime)
             <div class="card{{ $idn }} max-w-[9rem] min-w-[9rem] h-[12.75rem] hover:opacity-80" draggable="false">
-                @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
-                <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="h-full">
-                @else
-                <img src="storage/posters/{{ $anime->poster }}" alt="anime" class="h-full">
-                @endif
+                <a href="{{ route('anime.show', ['id' => $anime->id]) }}">
+                    @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
+                    <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="h-full">
+                    @else
+                    <img src="storage/posters/{{ $anime->poster }}" alt="anime" class="h-full">
+                    @endif
+                </a>
             </div>
             @endforeach
         </div>

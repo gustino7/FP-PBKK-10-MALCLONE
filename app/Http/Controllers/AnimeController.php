@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Anime;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AnimeController extends Controller
 {
@@ -84,13 +86,27 @@ class AnimeController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function getAllDashboard()
-    {
+    public function getAllDashboard(){
+        Carbon::setLocale('en');
+        $latest_reviews = DB::table('reviews')
+                            ->join('users','reviews.user_id','=','users.id')
+                            ->join('animes','reviews.anime_id','=','animes.id')
+                            ->select('reviews.comment', 'reviews.created_at', 'animes.poster', 'animes.title', 'users.name', 'animes.id')
+                            ->orderBy('created_at','desc')
+                            ->take(5)->get();
+        
+        // Time Differences
+        $current_time = Carbon::now();
+        foreach ($latest_reviews as $review) {
+            $created_at_time = Carbon::parse($review->created_at);
+            $review->created_at = $current_time->diffForHumans($created_at_time, true);
+        }
         return view('dashboard')->with([
             'animes_tv' => Anime::where('type', 'TV')->get(),
             'animes_latest' => Anime::orderBy('updated_at', 'desc')->get(),
             'animes_upcoming' => Anime::where('status', 'Not Yet Aired')->take(5)->get(),
-            'animes_top' => Anime::orderBy('avg_rating', 'desc')->take(5)->get()
+            'animes_top' => Anime::orderBy('avg_rating', 'desc')->take(5)->get(),
+            'reviews' => $latest_reviews
         ]);
     }
 
