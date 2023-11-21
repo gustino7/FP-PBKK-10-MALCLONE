@@ -9,16 +9,38 @@ use Illuminate\Http\Request;
 
 class CharacterController extends Controller
 {
-    public function create(Anime $anime)
+    public function create()
+    {
+        return view('character.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $character = Character::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'profile_picture' => $request->file('profile_picture')->store('profile_pictures', 'public'),
+        ]);
+
+        return redirect()->route('characters.create')->with('success', 'Character created successfully!');
+    }
+
+    public function createConnection(Anime $anime)
     {
         $anime->load('Anime_Character.character');
 
         $characters = Character::all();
 
-        return view('character.create', compact('anime', 'characters'));
+        return view('character.create-connection', compact('anime', 'characters'));
     }
 
-    public function store(Request $request, Anime $anime)
+    public function storeconnection(Request $request, Anime $anime)
     {
         $request->validate([
             'character_id' => 'required|exists:characters,id',

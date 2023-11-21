@@ -68,8 +68,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
 
-    Route::get('/anime/{anime}/characters/create', [CharacterController::class, 'create'])->name('anime.characters.create');
-    Route::post('/anime/{anime}/characters', [CharacterController::class, 'store'])->name('anime.characters.store');
+    Route::get('/character/create', [CharacterController::class, 'create'])->name('characters.create');
+    Route::post('/characters', [CharacterController::class, 'store'])->name('characters.store');
+
+    Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
+    Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
 
     // Community
     Route::get('/community', function () {

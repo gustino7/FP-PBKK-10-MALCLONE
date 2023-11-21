@@ -151,7 +151,7 @@
                         <strong>Characters and Voice Actors</strong>
                     </h1>
                     <div class="ml-auto">
-                        <a href="{{ route('anime.characters.create', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
                             <strong class="text-sm">Edit</strong>
                         </a>
                     </div>
@@ -174,7 +174,7 @@
                                     @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
                                     <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
                                     @else
-                                    <img src="{{ asset('storage/profile_pictures/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                    <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
                                     @endif
                                 </td>
                                 <td class="py-2 align-top">
@@ -210,7 +210,7 @@
                                     @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
                                     <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
                                     @else
-                                    <img src="{{ asset('storage/profile_pictures/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                    <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
                                     @endif
                                 </td>
                                 <td class="py-2 align-top">
