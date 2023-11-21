@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // $schedule->command('update:avg-rating')->timezone('Asia/Jakarta')->twiceDaily(12, 0)->runInBackground();
+        $schedule->command('update:avg-rating')->everyMinute();
     }
 
     /**
