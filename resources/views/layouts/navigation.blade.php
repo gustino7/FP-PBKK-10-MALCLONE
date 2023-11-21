@@ -28,6 +28,8 @@
                             </div>
                             @if(Auth::user()->profile_picture)
                             <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-8 h-8 rounded">
+                            @else
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Default Profile Picture" class="w-8 h-8 rounded">
                             @endif
                         </button>
                     </x-slot>

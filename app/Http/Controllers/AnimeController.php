@@ -14,7 +14,6 @@ class AnimeController extends Controller
     {
         // Replace this with the actual logic to fetch the top-ranked anime records.
         $topAnimes = Anime::orderBy('avg_rating', 'desc')->get();
-
         return view('top-anime', compact('topAnimes'));
     }
 
@@ -22,10 +21,10 @@ class AnimeController extends Controller
     {
         $anime = Anime::findOrFail($id);
         $user = Auth::user();
-        
+
         // Average rating for anime from review
         $anime->avg_rating = number_format($anime->avg_rating,2);
-        
+
         // Get the ranking by ordering animes by avg_rating
         $rank = Anime::orderByDesc('avg_rating')->pluck('id')->search($anime->id);
 
@@ -85,10 +84,11 @@ class AnimeController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function getAllDashboard(){
+    public function getAllDashboard()
+    {
         return view('dashboard')->with([
             'animes_tv' => Anime::where('type', 'TV')->get(),
-            'animes_latest' => Anime::orderBy('updated_at','desc')->get(),
+            'animes_latest' => Anime::orderBy('updated_at', 'desc')->get(),
             'animes_upcoming' => Anime::where('status', 'Not Yet Aired')->take(5)->get(),
             'animes_top' => Anime::orderBy('avg_rating', 'desc')->take(5)->get()
         ]);
@@ -103,24 +103,24 @@ class AnimeController extends Controller
     {
         // Define the array of seasons
         $seasonsArray = ['winter', 'spring', 'summer', 'fall'];
-    
+
         // Determine the start and end months for the selected season
         $startMonth = $this->getStartMonth($season);
         $endMonth = $this->getEndMonth($season);
-    
+
         // Fetch anime for the selected season and year
         $seasonalAnimes = Anime::whereYear('premiered', $year)
             ->whereMonth('premiered', '>=', $startMonth)
             ->whereMonth('premiered', '<=', $endMonth)
             ->get();
-    
+
         // Calculate previous and next year and season
         $prevYear = $year - 1;
         $nextYear = $year + 1;
-    
+
         $prevSeason = ($season == 'winter') ? 'fall' : $seasonsArray[array_search($season, $seasonsArray) - 1];
         $nextSeason = ($season == 'fall') ? 'winter' : $seasonsArray[array_search($season, $seasonsArray) + 1];
-    
+
         // Generate the array of seasons
         $seasons = [];
         foreach ($seasonsArray as $seasonItem) {
@@ -130,7 +130,7 @@ class AnimeController extends Controller
                 'label' => ucfirst($seasonItem) . ' ' . (($seasonItem == 'winter' && $season == 'winter') ? $prevYear : $year),
             ];
         }
-    
+
         // Pass the data to the view
         return view('seasonal-anime', compact('seasonalAnimes', 'season', 'year', 'prevYear', 'nextYear', 'prevSeason', 'nextSeason', 'seasons'));
     }
@@ -165,5 +165,12 @@ class AnimeController extends Controller
             default:
                 return 12; // December by default
         }
+    }
+
+    public function addCharacter(Request $request, Anime $anime)
+    {
+        $anime->characters()->createMany($request->input('characters'));
+
+        return redirect()->route('anime.show', ['id' => $anime->id])->with('success', 'Characters added successfully');
     }
 }

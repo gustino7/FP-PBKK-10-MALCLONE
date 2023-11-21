@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('anime_characters', function (Blueprint $table) {
             $table->unsignedBigInteger('anime_id')->nullable(false);
             $table->unsignedBigInteger('character_id')->nullable(false);
+            $table->string('role')->nullable(false);
             $table->timestamps();
 
             $table->foreign('anime_id')->references('id')->on('animes')->cascadeOnDelete();
