@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('episode');
             $table->string('status');
             $table->string('premiered');
+            $table->string('season');
             $table->timestamps();
         });
     }

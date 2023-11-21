@@ -15,46 +15,53 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @auth
+                <!-- User is logged in -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-lg leading-4 font-medium rounded-md text-black bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                             <div class="font-black">{{ Auth::user()->name }}</div>
-
-
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-
-
-                            <!-- User Profile Picture -->
-                            <div class="ml-1">
-                                <img src="{{ asset('storage/'.Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-8 h-8 rounded">
-                            </div>
+                            @if(Auth::user()->profile_picture)
+                            <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-8 h-8 rounded">
+                            @endif
                         </button>
                     </x-slot>
-
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link :href="route('user.profile', ['username' => auth()->user()->name])">
+                            {{ __('My Profile') }}
                         </x-dropdown-link>
-
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Account Settings') }}
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('anime.create')">
                             {{ __('Create Anime') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
-                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
+                @else
+                <!-- User is not logged in -->
+                <div class="flex space-x-4">
+                    <a href="{{ route('login') }}" class="bg-gray-300 text-gray-700 py-1 px-4 rounded transition duration-300 hover:bg-gray-400 focus:outline-none focus:shadow-outline">Login</a>
+                    <a href="{{ route('register') }}" class="bg-mal-blue text-white py-1 px-4 rounded transition duration-300 hover:bg-mal-darkblue focus:outline-none focus:shadow-outline">Sign Up</a>
+                </div>
+
+
+                @endauth
             </div>
+
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -79,8 +86,15 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
+                @auth
+                <!-- User is logged in -->
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                @else
+                <!-- User is not logged in -->
+                <div class="font-medium text-base text-gray-800">Guest</div>
+                <div class="font-medium text-sm text-gray-500">guest@example.com</div>
+                @endauth
             </div>
 
 
@@ -111,9 +125,10 @@
             {{ __('Top Anime') }}
         </x-nav-link>
 
-        <x-nav-link :href="route('seasonalanime')" :active="request()->routeIs('seasonalanime')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
+        <x-nav-link :href="route('anime.season', ['year' => 2023, 'season' => 'fall'])" :active="request()->routeIs('anime.season')" class="text-white font-black hover:text-black hover:bg-gray-300">
             {{ __('Seasonal Anime') }}
         </x-nav-link>
+
 
         <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
             {{ __('Community') }}
