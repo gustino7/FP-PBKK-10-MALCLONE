@@ -21,32 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/anime', function () {
-//     return view('anime');
-// })->middleware(['auth', 'verified'])->name('anime');
-
-// Route::get('/searchanime', function () {
-//     return view('searchanime');
-// })->middleware(['auth', 'verified'])->name('searchanime');
-
-// Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
-// Route::get('/anime/create', [AnimeController::class, 'create'])->name('anime.create');
-// Route::post('/anime', [AnimeController::class, 'store'])->name('anime.store');
-// Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
-
-// Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])
-//     ->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])
-//     ->name('anime.season');
-
-
-
-// Route::get('/community', function () {
-//     return view('community');
-// })->middleware(['auth', 'verified'])->name('community');
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
 
