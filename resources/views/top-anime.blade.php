@@ -28,9 +28,9 @@
                                         <div class="mr-4">
                                             <a href="{{ route('anime.show', ['id' => $anime->id]) }}">
                                                 @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
-                                                <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="mt-1 w-13 h-20 object-cover rounded">
+                                                <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="mt-1 w-[3rem] h-[4rem] object-cover rounded">
                                                 @else
-                                                <img src="{{ asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="mt-1 w-13 h-20 object-cover rounded">
+                                                <img src="{{ asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="mt-1 w-[3rem] h-[4rem] object-cover rounded">
                                                 @endif
                                             </a>
 
