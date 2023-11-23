@@ -270,6 +270,8 @@
                     </div>
                 </div>
 
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300">
+                
                 <div class="flex justify-between">
                     {{-- Opening Songs --}}
                     <div class="w-1/2">
@@ -298,7 +300,6 @@
                         @endforeach
                     </div>
                 </div>
-
 
                 <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300">
 
