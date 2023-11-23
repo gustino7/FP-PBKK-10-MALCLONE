@@ -151,10 +151,10 @@
                         <strong>Characters & Voice Actors</strong>
                     </h1>
                     <div class="ml-auto">
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More characters</strong>
                         </a>
                     </div>
@@ -239,10 +239,10 @@
                         <strong>Staff</strong>
                     </h1>
                     <div class="ml-auto">
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More staff</strong>
                         </a>
                     </div>
@@ -256,7 +256,7 @@
                         <h1 class="text-black">
                             <strong>Opening Theme</strong>
                         </h1>
-                        <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Opening']) }}" class="text-link-blue ml-auto me-5">
+                        <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Opening']) }}" class="text-link-blue ml-auto me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
                     </div>
@@ -264,13 +264,20 @@
                         <h1 class="text-black">
                             <strong>Ending Theme</strong>
                         </h1>
-                        <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Ending']) }}" class="text-link-blue ml-auto me-5">
+                        <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Ending']) }}" class="text-link-blue ml-auto">
                             <strong class="text-sm">Edit</strong>
                         </a>
                     </div>
                 </div>
 
-                <hr class="mt-[-5px] border-t-2 border-gray-300">
+                <div class="flex">
+                    <div class="w-1/2 flex items-center">
+                        <hr class="mt-[-5px] border-t-2 border-gray-300 w-[95%]">
+                    </div>
+                    <div class="w-1/2 flex items-center">
+                        <hr class="mt-[-5px] border-t-2 border-gray-300 w-full">
+                    </div>
+                </div>
 
                 <div class="flex justify-between">
                     {{-- Opening Songs --}}
