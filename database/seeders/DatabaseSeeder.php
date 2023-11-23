@@ -6,6 +6,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Anime;
+use App\Models\Character;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +20,9 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
         ]);
         Anime::factory()
-            ->count(10)
+            ->count(20)
             ->create();
+        Character::factory(10)->create();
+        User::factory()->amogus()->create();
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\UserController;
@@ -42,12 +43,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
 
+    //Characters
     Route::get('/character/create', [CharacterController::class, 'create'])->name('characters.create');
     Route::post('/characters', [CharacterController::class, 'store'])->name('characters.store');
 
     Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
     Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
 
+    // Songs
+    Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');
+    Route::post('/anime/{anime}/songs', [SongController::class, 'store'])->name('songs.store');
     // Community
     Route::get('/community', function () {
         return view('community');

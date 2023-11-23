@@ -106,7 +106,7 @@
                 <div class="font-bold border border-gray-300 p-2 flex items-center bg-[#F9F8F9]">
                     <div class="w-1/8">
                         <div class="my-3 border-mal-blue pl-4">
-                            <p class="text-lg font-semibold text-mal-blue">SCORE</p>
+                            <p class="text-lg font-semibold text-mal-blue text-center">SCORE</p>
                             <p class="text-3xl">{{ $anime->avg_rating }}</p>
                         </div>
                     </div>
@@ -148,11 +148,14 @@
                 {{-- Character Voice Actor --}}
                 <div class="mt-4 flex justify-between">
                     <h1 class="text-black">
-                        <strong>Characters and Voice Actors</strong>
+                        <strong>Characters & Voice Actors</strong>
                     </h1>
                     <div class="ml-auto">
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
                             <strong class="text-sm">Edit</strong>
+                        </a>
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                            <strong class="text-sm">More characters</strong>
                         </a>
                     </div>
                 </div>
@@ -214,7 +217,7 @@
                                     @endif
                                 </td>
                                 <td class="py-2 align-top">
-                                    <div class="ml-[-1rem]">
+                                    <div class="ml-[-2rem]">
                                         <p class="text-mal-blue">{{ $character->name }}</p>
                                         <p class="text-xs">{{ $animeCharacter->role }}</p>
                                     </div>
@@ -230,18 +233,76 @@
                     </table>
                 </div>
 
-
-                {{-- Songs --}}
-                <div class="mt-4">
+                {{-- Staff --}}
+                <div class="mt-2 flex justify-between">
                     <h1 class="text-black">
-                        <strong>Songs</strong>
+                        <strong>Staff</strong>
                     </h1>
-                    <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
-
-                    <div>
-
+                    <div class="ml-auto">
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                            <strong class="text-sm">Edit</strong>
+                        </a>
+                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
+                            <strong class="text-sm">More staff</strong>
+                        </a>
                     </div>
                 </div>
+
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+
+                {{-- Songs --}}
+                <div class="mt-6 flex justify-between">
+                    <div class="w-1/2 flex items-center">
+                        <h1 class="text-black">
+                            <strong>Opening Theme</strong>
+                        </h1>
+                        <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Opening']) }}" class="text-link-blue ml-auto me-5">
+                            <strong class="text-sm">Edit</strong>
+                        </a>
+                    </div>
+                    <div class="w-1/2 flex items-center">
+                        <h1 class="text-black">
+                            <strong>Ending Theme</strong>
+                        </h1>
+                        <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Ending']) }}" class="text-link-blue ml-auto me-5">
+                            <strong class="text-sm">Edit</strong>
+                        </a>
+                    </div>
+                </div>
+
+                <hr class="mt-[-5px] border-t-2 border-gray-300">
+
+                <div class="flex justify-between">
+                    {{-- Opening Songs --}}
+                    <div class="w-1/2">
+                        @foreach($anime->Song()->where('theme_type', 'Opening')->get() as $key => $song)
+                        <div class="flex items-center">
+                            <div class="flex items-center">
+                                @if(count($anime->Song()->where('theme_type', 'Opening')->get()) > 1)
+                                <p class="text-gray-600">{{ $key + 1 }}:{!! "&nbsp;" !!}</p>
+                                @endif
+                                <p class="text-mal-blue">"{{ $song->title }}"{!! "&nbsp;" !!}</p>
+                                <p class="text-gray-600"> by {{ $song->singer }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    {{-- Ending Songs --}}
+                    <div class="w-1/2">
+                        @foreach($anime->Song()->where('theme_type', 'Ending')->get() as $key => $song)
+                        <div class="flex items-center">
+                            @if(count($anime->Song()->where('theme_type', 'Ending')->get()) > 1)
+                            <p class="text-gray-600">{{ $key + 1 }}:{!! "&nbsp;" !!}</p>
+                            @endif
+                            <p class="text-mal-blue"> "{{ $song->title }}"{!! "&nbsp;" !!}</p>
+                            <p class="text-gray-600"> by {{ $song->singer }}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300">
+
                 {{-- Reviews --}}
                 <div class="mt-4">
                     <h1 class="text-black">
