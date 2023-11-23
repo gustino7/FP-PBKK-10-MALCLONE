@@ -14,7 +14,7 @@
                     <h1><a href="#">Latest Review</a></h1>
                 </div>
                 @foreach ($reviews as $review)
-                <x-latest-review img="{{ $review -> poster }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" anime="{{ $review -> id }}"/>
+                <x-latest-review img="{{ $review -> poster }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" anime="{{ $review -> id }}" />
                 @endforeach
             </div>
             {{-- Right side --}}
@@ -25,7 +25,7 @@
                     </div>
                     <div class="flex flex-col bg-slate-100">
                         @foreach($animes_upcoming as $anime)
-                            <x-recomend-side num="{{ $loop -> iteration }}" img="storage/posters/{{ $anime->poster }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->episode }}" rating="{{ $anime->avg_rating }}" id="{{ $anime->id }}"/>
+                        <x-recomend-side num="{{ $loop -> iteration }}" img="storage/posters/{{ $anime->poster }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->episode }}" rating="{{ $anime->avg_rating }}" id="{{ $anime->id }}" />
                         @endforeach
                     </div>
                 </div>
@@ -35,12 +35,12 @@
                     </div>
                     <div class="flex flex-col bg-slate-100">
                         @foreach($animes_top as $anime)
-                            <x-recomend-side num="{{ $loop -> iteration }}" img="storage/posters/{{ $anime->poster }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->episode }}" rating="{{ $anime->avg_rating }}" id="{{ $anime->id }}"/>
+                        <x-recomend-side num="{{ $loop -> iteration }}" img="storage/posters/{{ $anime->poster }}" title="{{ $anime->title }}" type="{{ $anime->type }}" episode="{{ $anime->episode }}" rating="{{ $anime->avg_rating }}" id="{{ $anime->id }}" />
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </x-slot>
 </x-app-layout>

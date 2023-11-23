@@ -50,6 +50,9 @@
                 <div class="mb-4">
                     <label for="poster" class="block text-gray-600">Poster</label>
                     <input type="file" name="poster" id="poster" accept="image/*" class="w-full border border-gray-300 rounded p-2" required>
+                    @error('poster')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mt-4">
