@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('birthday');
             $table->text('description')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->unsignedBigInteger('position_staff_id');
             $table->timestamps();
 

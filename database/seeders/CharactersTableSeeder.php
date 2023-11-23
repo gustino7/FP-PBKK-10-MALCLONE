@@ -13,7 +13,7 @@ class CharactersTableSeeder extends Seeder
      */
     public function run()
     {
-        Character::factory(10)->create();
+        // Character::factory(10)->create();
         // Adjust the number as needed, in this example, it will create 10 characters
     }
 }
