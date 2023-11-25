@@ -1,5 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
+        @if ($errors->any())
+            {{-- @foreach ($errors->all() as $error) --}}
+                <x-error-msg message="{{ $errors -> first() }}" />
+            {{-- @endforeach --}}
+        @endif
         <h4 class="font-semibold text-lg text-gray-800 leading-3 mb-8">
             My Review
         </h4>

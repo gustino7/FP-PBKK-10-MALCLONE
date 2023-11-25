@@ -9,6 +9,8 @@ class User_Anime extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_animes';
+
     protected $fillable = [
         "user_id",
         "anime_id"

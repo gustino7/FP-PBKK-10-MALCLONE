@@ -3,7 +3,7 @@
         <div class="w-[20%]">
             <a href="{{ route('anime.show', ['id' => $anime]) }}">
                 @if (filter_var($img, FILTER_VALIDATE_URL))
-                <img src="{{ $img }}" alt="anime" class="w-[5rem] h-full">
+                <img src="{{ $img }}" alt="image" class="w-[5rem] h-full">
                 @else
                 <img src="storage/posters/{{ $img }}" alt="anime" class="w-[5rem] h-full">
                 @endif
@@ -17,7 +17,7 @@
                 {{ $comment }}
             </p>
             {{-- Ganti href ke id review --}}
-            <a href="#" class="text-xs text-blue-400 hover:underline w-fit">read more ...</a>
+            <a href="{{ route('review.show', ['id' => $reviewId]) }}" class="text-xs text-blue-400 hover:underline w-fit">read more ...</a>
             {{-- Ganti href ke id user --}}
             <p class="text-gray-500 text-xs">{{ $time }} ago by <a href="{{ route('user.profile', ['username' => $user]) }}" class="text-blue-400 hover:underline">{{ $user }}</a></p>
         </div>
