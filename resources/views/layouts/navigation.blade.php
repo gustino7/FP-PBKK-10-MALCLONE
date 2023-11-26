@@ -40,9 +40,11 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Account Settings') }}
                         </x-dropdown-link>
+                        @if (auth()->user()->isAdmin === 1)
                         <x-dropdown-link :href="route('anime.create')">
                             {{ __('Create Anime') }}
                         </x-dropdown-link>
+                        @endif
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

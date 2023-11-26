@@ -18,13 +18,29 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// Role Guest
+Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
+Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
+Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
+// Role Admin
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    // Anime
+    Route::get('/anime/create', [AnimeController::class, 'create'])->name('anime.create');
+    Route::post('/anime', [AnimeController::class, 'store'])->name('anime.store');
 
+    // Character
+    Route::get('/character/create', [CharacterController::class, 'create'])->name('characters.create');
+    Route::post('/characters', [CharacterController::class, 'store'])->name('characters.store');
+    Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
+    Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
+});
+
+// Role User
+Route::middleware(['auth', 'verified'])->group(function () {
     // REVIEW
     Route::get('/review/create/{anime_id}/{user_id}', [ReviewController::class, 'show'])->name('review.create');
     Route::post('/review/create', [ReviewController::class, 'create'])->name('review.store');
@@ -33,25 +49,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/review/all/{id}', [ReviewController::class, 'getAll'])->name('review.showAll');
 
     // ANIME
-    Route::get('/anime', function () {
-        return view('anime');
-    })->name('anime');
-    Route::get('/searchanime', function () {
-        return view('searchanime');
-    })->name('searchanime');
     Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
-    Route::get('/anime/create', [AnimeController::class, 'create'])->name('anime.create');
-    Route::post('/anime', [AnimeController::class, 'store'])->name('anime.store');
     Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
     Route::post('/anime/addlist/{id}', [UserAnimeController::class,'addToList'])->name('anime.addlist');
     Route::post('/anime/removelist/{id}', [UserAnimeController::class,'removeToList'])->name('anime.removelist');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
-
-    Route::get('/character/create', [CharacterController::class, 'create'])->name('characters.create');
-    Route::post('/characters', [CharacterController::class, 'store'])->name('characters.store');
-
-    Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
-    Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
 
     // Community
     Route::get('/community', function () {
@@ -65,9 +67,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/upload-profile-picture', [ProfileController::class, 'uploadProfilePicture'])->name('upload.profile_picture');
 });
-
-Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
-
-Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 
 require __DIR__ . '/auth.php';

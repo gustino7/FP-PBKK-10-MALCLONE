@@ -164,11 +164,13 @@
                     <h1 class="text-black">
                         <strong>Characters and Voice Actors</strong>
                     </h1>
+                    @if (auth()->user()->isAdmin === 1)
                     <div class="ml-auto">
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-5">
                             <strong class="text-sm">Edit</strong>
                         </a>
                     </div>
+                    @endif
                 </div>
                 <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
                 <div class="flex">
