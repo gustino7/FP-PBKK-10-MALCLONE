@@ -4,7 +4,11 @@
     </div>
     <div class="basis-1/5 mx-3">
         <a href="{{ route('anime.show', ['id' => $id]) }}" class="min-w-[4.5rem] w-full h-[5.75rem]">
+            @if (filter_var($img, FILTER_VALIDATE_URL))
             <img src="{{ $img }}" alt="anime">
+            @else
+            <img src="storage/posters/{{ $img }}" alt="anime">
+            @endif
         </a>
     </div>
     <div class="basis-3/5 flex flex-col">

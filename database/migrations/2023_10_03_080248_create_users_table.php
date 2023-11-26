@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('isAdmin')->default(0);
             $table->string('profile_picture')->nullable();
             $table->string('description')->nullable();
             $table->boolean('is_premium')->default(0);

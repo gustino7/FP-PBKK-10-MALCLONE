@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\User_Anime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Anime;
@@ -33,7 +34,20 @@ class AnimeController extends Controller
         // Edit status
         $review_id = Review::where('user_id', $user->id)->where('anime_id', $anime->id)->value('id');
         $review = Review::find($review_id);
-        return view('anime.show', compact('anime', 'rank', 'review', 'review_id'));
+        
+        // To get info user_anime (add to list)
+        $user_anime = User_Anime::where('user_id', $user->id)->where('anime_id', $anime->id)->value('created_at');
+
+        // Get reviews in this anime
+        $latest_reviews = DB::table('reviews')
+                            ->join('users','reviews.user_id','=','users.id')
+                            ->join('animes','reviews.anime_id','=','animes.id')
+                            ->select('reviews.id as review_id', 'reviews.comment', 'reviews.created_at', 'users.profile_picture', 'animes.title', 'users.name', 'animes.id')
+                            ->where('animes.id', $anime->id)
+                            ->orderBy('created_at','desc')
+                            ->take(5)->get();
+
+        return view('anime.show', compact('anime', 'rank', 'review', 'review_id', 'user_anime', 'latest_reviews'));
     }
 
     public function store(Request $request)
@@ -91,7 +105,7 @@ class AnimeController extends Controller
         $latest_reviews = DB::table('reviews')
                             ->join('users','reviews.user_id','=','users.id')
                             ->join('animes','reviews.anime_id','=','animes.id')
-                            ->select('reviews.comment', 'reviews.created_at', 'animes.poster', 'animes.title', 'users.name', 'animes.id')
+                            ->select('reviews.id as reviewId', 'reviews.comment', 'reviews.created_at', 'animes.poster', 'animes.title', 'users.name', 'animes.id')
                             ->orderBy('created_at','desc')
                             ->take(5)->get();
         

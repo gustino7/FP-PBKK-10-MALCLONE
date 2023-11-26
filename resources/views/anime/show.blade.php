@@ -6,6 +6,9 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        @if(session('message'))
+            <x-error-msg message="{{ session('message') }}" />
+        @endif
         <div class="bg-white p-6 shadow sm:rounded-lg flex">
             <div class="w-[23%] flex flex-col">
                 <div>
@@ -129,9 +132,20 @@
                 <div class="font-medium border border-gray-300 p-2 flex bg-[#F9F8F9]">
                     <div class="w-full">
                         <div class="my-1 border-mal-blue pl-4">
-                            <p class="text-m">
-                                <button class="font-bold border rounded-lg px-2 py-1 me-3 bg-mal-blue text-white hover:opacity-70">Add To List</button>
+                            @if ($user_anime)
+                            <p>
+                                This anime is in your list
                             </p>
+                            <form action="{{ route('anime.removelist', ['id' => $anime->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="font-bold border rounded-lg px-2 py-1 me-3 bg-red-500 text-white hover:opacity-70">Drop Anime</button>
+                            </form>
+                            @else
+                            <form action="{{ route('anime.addlist', ['id' => $anime->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="font-bold border rounded-lg px-2 py-1 me-3 bg-mal-blue text-white hover:opacity-70">Add To List</button>
+                            </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -151,9 +165,11 @@
                         <strong>Characters & Voice Actors</strong>
                     </h1>
                     <div class="ml-auto">
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More characters</strong>
                         </a>
@@ -232,16 +248,17 @@
                         </tbody>
                     </table>
                 </div>
-
                 {{-- Staff --}}
                 <div class="mt-2 flex justify-between">
                     <h1 class="text-black">
                         <strong>Staff</strong>
                     </h1>
                     <div class="ml-auto">
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More staff</strong>
                         </a>
@@ -256,17 +273,21 @@
                         <h1 class="text-black">
                             <strong>Opening Theme</strong>
                         </h1>
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Opening']) }}" class="text-link-blue ml-auto me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                     </div>
                     <div class="w-1/2 flex items-center">
                         <h1 class="text-black">
                             <strong>Ending Theme</strong>
                         </h1>
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Ending']) }}" class="text-link-blue ml-auto">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                     </div>
                 </div>
 
@@ -318,10 +339,13 @@
                     <hr class="my-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
                     <div>
                         <div class="bg-[#F9F8F9] flex flex-row justify-between px-8 h-8 items-center ">
-                            <a href="{{ route('review.create', ['anime_id' => $anime->id, 'user_id' => Auth::user()->id ]) }}" class="text-mal-blue font-bold hover:underline">Write review</a>
-                            <a href="#" class="text-mal-blue font-bold hover:underline">All reviews</a>
+                            <a href="{{ route('review.create', ['anime_id' => $anime -> id, 'user_id' => Auth::user()->id ]) }}" class="text-mal-blue font-bold hover:underline">Write review</a>
+                            <a href="{{ route('review.showAll', ['id' => $anime -> id]) }}" class="text-mal-blue font-bold hover:underline">All reviews</a>
                         </div>
                     </div>
+                    @foreach ($latest_reviews as $review)
+                        <x-show-review img="{{ $review -> profile_picture }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" review="{{ $review -> review_id }}"/>
+                    @endforeach
                 </div>
             </div>
         </div>
