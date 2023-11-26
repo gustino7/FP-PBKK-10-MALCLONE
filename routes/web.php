@@ -3,6 +3,7 @@
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserAnimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
@@ -55,6 +56,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/anime/removelist/{id}', [UserAnimeController::class,'removeToList'])->name('anime.removelist');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
 
+    // Songs
+    Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');
+    Route::post('/anime/{anime}/songs', [SongController::class, 'store'])->name('songs.store');
     // Community
     Route::get('/community', function () {
         return view('community');
