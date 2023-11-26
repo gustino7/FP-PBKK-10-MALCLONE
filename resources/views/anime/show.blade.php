@@ -164,16 +164,16 @@
                     <h1 class="text-black">
                         <strong>Characters & Voice Actors</strong>
                     </h1>
-                    @if (auth()->user()->isAdmin === 1)
                     <div class="ml-auto">
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More characters</strong>
                         </a>
                     </div>
-                    @endif
                 </div>
                 <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
                 <div class="flex">
@@ -254,9 +254,11 @@
                         <strong>Staff</strong>
                     </h1>
                     <div class="ml-auto">
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                         <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More staff</strong>
                         </a>
@@ -271,17 +273,21 @@
                         <h1 class="text-black">
                             <strong>Opening Theme</strong>
                         </h1>
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Opening']) }}" class="text-link-blue ml-auto me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                     </div>
                     <div class="w-1/2 flex items-center">
                         <h1 class="text-black">
                             <strong>Ending Theme</strong>
                         </h1>
+                        @if (auth()->user()->isAdmin === 1)
                         <a href="{{ route('songs.create', ['anime' => $anime->id, 'theme_type' => 'Ending']) }}" class="text-link-blue ml-auto">
                             <strong class="text-sm">Edit</strong>
                         </a>
+                        @endif
                     </div>
                 </div>
 
