@@ -36,9 +36,11 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // Character
     Route::get('/character/create', [CharacterController::class, 'create'])->name('characters.create');
     Route::post('/characters', [CharacterController::class, 'store'])->name('characters.store');
+    Route::get('/characters/{character}', [CharacterController::class, 'show'])->name('characters.show');
     Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
     Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
-    
+    Route::get('/anime/{anime}/characters/all', [CharacterController::class, 'showAll'])->name('anime.characters.all');
+
     // Songs
     Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');
     Route::post('/anime/{anime}/songs', [SongController::class, 'store'])->name('songs.store');
@@ -56,8 +58,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ANIME
     Route::get('/topanime', [AnimeController::class, 'index'])->name('topanime');
     Route::get('/anime/{id}', [AnimeController::class, 'show'])->name('anime.show');
-    Route::post('/anime/addlist/{id}', [UserAnimeController::class,'addToList'])->name('anime.addlist');
-    Route::post('/anime/removelist/{id}', [UserAnimeController::class,'removeToList'])->name('anime.removelist');
+    Route::post('/anime/addlist/{id}', [UserAnimeController::class, 'addToList'])->name('anime.addlist');
+    Route::post('/anime/removelist/{id}', [UserAnimeController::class, 'removeToList'])->name('anime.removelist');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
 
     // Community

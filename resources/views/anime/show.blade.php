@@ -7,7 +7,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         @if(session('message'))
-            <x-error-msg message="{{ session('message') }}" />
+        <x-error-msg message="{{ session('message') }}" />
         @endif
         <div class="bg-white p-6 shadow sm:rounded-lg flex">
             <div class="w-[23%] flex flex-col">
@@ -170,9 +170,10 @@
                             <strong class="text-sm">Edit</strong>
                         </a>
                         @endif
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
+                        <a href="{{ route('anime.characters.all', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More characters</strong>
                         </a>
+
                     </div>
                 </div>
                 <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
@@ -198,7 +199,11 @@
                                 </td>
                                 <td class="py-2 align-top">
                                     <div class="ml-[-4rem]">
-                                        <p class="text-mal-blue">{{ $character->name }}</p>
+                                        <p class="text-mal-blue">
+                                            <a href="{{ route('characters.show', ['character' => $character]) }}">
+                                                {{ $character->name }}
+                                            </a>
+                                        </p>
                                         <p class="text-xs">{{ $animeCharacter->role }}</p>
                                     </div>
                                 </td>
@@ -234,7 +239,11 @@
                                 </td>
                                 <td class="py-2 align-top">
                                     <div class="ml-[-2rem]">
-                                        <p class="text-mal-blue">{{ $character->name }}</p>
+                                        <p class="text-mal-blue">
+                                            <a href="{{ route('characters.show', ['character' => $character]) }}">
+                                                {{ $character->name }}
+                                            </a>
+                                        </p>
                                         <p class="text-xs">{{ $animeCharacter->role }}</p>
                                     </div>
                                 </td>
@@ -344,7 +353,7 @@
                         </div>
                     </div>
                     @foreach ($latest_reviews as $review)
-                        <x-show-review img="{{ $review -> profile_picture }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" review="{{ $review -> review_id }}"/>
+                    <x-show-review img="{{ $review -> profile_picture }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" review="{{ $review -> review_id }}" />
                     @endforeach
                 </div>
             </div>
