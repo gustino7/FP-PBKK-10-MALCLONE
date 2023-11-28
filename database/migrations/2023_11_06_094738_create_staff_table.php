@@ -17,10 +17,7 @@ return new class extends Migration
             $table->date('birthday');
             $table->text('description')->nullable();
             $table->string('profile_picture')->nullable();
-            $table->unsignedBigInteger('position_staff_id');
             $table->timestamps();
-
-            $table->foreign('position_staff_id')->references('id')->on('position_staff');
         });
     }
 

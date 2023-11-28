@@ -9,16 +9,21 @@ class Anime_Staff extends Model
 {
     use HasFactory;
 
+    protected $table = 'anime_staff';
+
     protected $fillable = [
         "anime_id",
-        "staff_id"
+        "staff_id",
+        'role',
     ];
 
-    public function Anime(){
+    public function Anime()
+    {
         return $this->belongsTo(Anime::class);
     }
 
-    public function Staff(){
+    public function Staff()
+    {
         return $this->belongsTo(Staff::class);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserAnimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,15 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
     Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
     Route::get('/anime/{anime}/characters/all', [CharacterController::class, 'showAll'])->name('anime.characters.all');
+
+    // Staff
+    Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
+    Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
+    Route::get('/anime/{anime}/staff/createConnection', [StaffController::class, 'createConnection'])
+        ->name('anime.staff.createConnection');
+    Route::post('/anime/{anime}/staff/store', [StaffController::class, 'storeConnection'])
+        ->name('anime.staff.store');
+
 
     // Songs
     Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');

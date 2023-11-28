@@ -53,40 +53,29 @@
                     </div>
                 </div>
                 <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
-                <div class="flex">
-                    <table class="w-full">
-                        <tbody>
-                            @php
-                            $characters = $anime->Anime_Character;
-                            @endphp
-                            @foreach($characters as $animeCharacter)
-                            @php
-                            $character = $animeCharacter->Character;
-                            $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
-                            @endphp
-                            <tr class="{{ $bgColor }}">
-                                <td class="">
-                                    @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
-                                    <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
-                                    @else
-                                    <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
-                                    @endif
-                                </td>
-                                <td class="py-2 align-top">
-                                    <div class="ml-[-2rem]">
-                                        <p class="text-mal-blue">{{ $character->name }}</p>
-                                        <p class="text-xs">{{ $animeCharacter->role }}</p>
-                                    </div>
-                                </td>
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="my-1 border-t-2 border-gray-100">
-                                </td>
-                            </tr>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="flex flex-col">
+                    @php
+                    $characters = $anime->Anime_Character;
+                    @endphp
+                    @foreach($characters as $animeCharacter)
+                    @php
+                    $character = $animeCharacter->Character;
+                    $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
+                    @endphp
+                    <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100">
+                        <div class="">
+                            @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
+                            <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                            @else
+                            <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                            @endif
+                        </div>
+                        <div class="ml-2]">
+                            <p class="text-mal-blue ml-2">{{ $character->name }}</p>
+                            <p class="text-xs ml-2">{{ $animeCharacter->role }}</p>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

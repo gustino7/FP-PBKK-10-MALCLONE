@@ -22,6 +22,7 @@ class UserFactory extends Factory
             'profile_picture' => null,
             'description' => null,
             'is_premium' => 0,
+            'isAdmin' => 1,
             'wallpaper' => null,
         ];
     }
