@@ -13,6 +13,32 @@
                 @else
                 <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-50 h-50 object-cover rounded-md mb-4">
                 @endif
+                <h2 class="text-lg font-semibold text-black mt-4">Animeography</h2>
+
+                <ul class="mt-2">
+                    <hr class="my-2 border-t-2 border-gray-300">
+                    @forelse ($animeography as $entry)
+                    <li class="flex items-center space-x-4 py-1 border-b border-gray-300">
+                        <div class="flex-shrink-0">
+                            @if (filter_var($entry->Anime->poster, FILTER_VALIDATE_URL))
+                            <img src="{{ $entry->Anime->poster }}" alt="{{ $entry->Anime->title }}" class="w-16 h-24 object-cover rounded-md">
+                            @else
+                            <img src="{{ asset('storage/posters/' . $entry->Anime->poster) }}" alt="{{ $entry->Anime->title }}" class="w-16 h-24 object-cover rounded-md">
+                            @endif
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-mal-blue text-sm">
+                                <a href="{{ route('anime.show', ['id' => $entry->Anime->id]) }}">{{ $entry->Anime->title }}</a>
+                            </p>
+                            <p class="text-gray-600 text-sm">{{ $entry->role }}</p>
+                        </div>
+                    </li>
+                    @empty
+                    <p class="text-gray-600">No animeography available for this character.</p>
+                    @endforelse
+                </ul>
+
+
             </div>
 
             <div class="w-full ms-5">

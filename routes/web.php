@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // Character
     Route::get('/character/create', [CharacterController::class, 'create'])->name('characters.create');
     Route::post('/characters', [CharacterController::class, 'store'])->name('characters.store');
-    Route::get('/characters/{character}', [CharacterController::class, 'show'])->name('characters.show');
+    Route::get('/characters/{character}', [CharacterController::class, 'showAnimeography'])->name('characters.show');
     Route::get('/anime/{anime}/characters/createconnection', [CharacterController::class, 'createConnection'])->name('anime.characters.createconnection');
     Route::post('/anime/{anime}/characters', [CharacterController::class, 'storeconnection'])->name('anime.characters.store');
     Route::get('/anime/{anime}/characters/all', [CharacterController::class, 'showAll'])->name('anime.characters.all');

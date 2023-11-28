@@ -72,4 +72,11 @@ class CharacterController extends Controller
 
         return view('character.show-all', compact('anime'));
     }
+
+    public function showAnimeography(Character $character)
+    {
+        $animeography = Anime_Character::where('character_id', $character->id)->with('Anime')->get();
+
+        return view('character.show', compact('character', 'animeography'));
+    }
 }
