@@ -44,6 +44,9 @@
                         <x-dropdown-link :href="route('anime.create')">
                             {{ __('Create Anime') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('staff.create')">
+                            {{ __('Create Staff') }}
+                        </x-dropdown-link>
                         @endif
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

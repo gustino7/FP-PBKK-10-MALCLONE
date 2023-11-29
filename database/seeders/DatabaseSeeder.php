@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         Anime::factory()
             ->count(20)
             ->create();
-        Character::factory(10)->create();
+        Character::factory(20)->create();
         User::factory()->amogus()->create();
     }
 }

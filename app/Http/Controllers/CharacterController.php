@@ -31,6 +31,11 @@ class CharacterController extends Controller
         return redirect()->route('characters.create')->with('success', 'Character created successfully!');
     }
 
+    public function show(Character $character)
+    {
+        return view('character.show', compact('character'));
+    }
+
     public function createConnection(Anime $anime)
     {
         $anime->load('Anime_Character.character');
@@ -59,5 +64,19 @@ class CharacterController extends Controller
 
         return redirect()->route('anime.show', ['id' => $anime->id])
             ->with('error', 'Character is already associated with the anime.');
+    }
+
+    public function showAll(Anime $anime)
+    {
+        $anime->load('Anime_Character.character');
+
+        return view('character.show-all', compact('anime'));
+    }
+
+    public function showAnimeography(Character $character)
+    {
+        $animeography = Anime_Character::where('character_id', $character->id)->with('Anime')->get();
+
+        return view('character.show', compact('character', 'animeography'));
     }
 }

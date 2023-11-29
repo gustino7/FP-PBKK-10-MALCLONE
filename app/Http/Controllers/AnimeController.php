@@ -26,7 +26,7 @@ class AnimeController extends Controller
         $user = Auth::user();
 
         // Average rating for anime from review
-        $anime->avg_rating = number_format($anime->avg_rating,2);
+        $anime->avg_rating = number_format($anime->avg_rating, 2);
 
         // Get the ranking by ordering animes by avg_rating
         $rank = Anime::orderByDesc('avg_rating')->pluck('id')->search($anime->id);
@@ -34,18 +34,18 @@ class AnimeController extends Controller
         // Edit status
         $review_id = Review::where('user_id', $user->id)->where('anime_id', $anime->id)->value('id');
         $review = Review::find($review_id);
-        
+
         // To get info user_anime (add to list)
         $user_anime = User_Anime::where('user_id', $user->id)->where('anime_id', $anime->id)->value('created_at');
 
         // Get reviews in this anime
         $latest_reviews = DB::table('reviews')
-                            ->join('users','reviews.user_id','=','users.id')
-                            ->join('animes','reviews.anime_id','=','animes.id')
-                            ->select('reviews.id as review_id', 'reviews.comment', 'reviews.created_at', 'users.profile_picture', 'animes.title', 'users.name', 'animes.id')
-                            ->where('animes.id', $anime->id)
-                            ->orderBy('created_at','desc')
-                            ->take(5)->get();
+            ->join('users', 'reviews.user_id', '=', 'users.id')
+            ->join('animes', 'reviews.anime_id', '=', 'animes.id')
+            ->select('reviews.id as review_id', 'reviews.comment', 'reviews.created_at', 'users.profile_picture', 'animes.title', 'users.name', 'animes.id')
+            ->where('animes.id', $anime->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)->get();
 
         return view('anime.show', compact('anime', 'rank', 'review', 'review_id', 'user_anime', 'latest_reviews'));
     }
@@ -100,15 +100,16 @@ class AnimeController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function getAllDashboard(){
+    public function getAllDashboard()
+    {
         Carbon::setLocale('en');
         $latest_reviews = DB::table('reviews')
-                            ->join('users','reviews.user_id','=','users.id')
-                            ->join('animes','reviews.anime_id','=','animes.id')
-                            ->select('reviews.id as reviewId', 'reviews.comment', 'reviews.created_at', 'animes.poster', 'animes.title', 'users.name', 'animes.id')
-                            ->orderBy('created_at','desc')
-                            ->take(5)->get();
-        
+            ->join('users', 'reviews.user_id', '=', 'users.id')
+            ->join('animes', 'reviews.anime_id', '=', 'animes.id')
+            ->select('reviews.id as reviewId', 'reviews.comment', 'reviews.created_at', 'animes.poster', 'animes.title', 'users.name', 'animes.id')
+            ->orderBy('created_at', 'desc')
+            ->take(5)->get();
+
         // Time Differences
         $current_time = Carbon::now();
         foreach ($latest_reviews as $review) {
@@ -202,5 +203,13 @@ class AnimeController extends Controller
         $anime->characters()->createMany($request->input('characters'));
 
         return redirect()->route('anime.show', ['id' => $anime->id])->with('success', 'Characters added successfully');
+    }
+
+    public function storeStaffConnection(Request $request, Anime $anime)
+    {
+        $anime->Anime_Staff()->createMany($request->input('staff'));
+
+        return redirect()->route('anime.show', ['id' => $anime->id])
+            ->with('success', 'Staff members added successfully.');
     }
 }

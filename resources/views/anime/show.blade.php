@@ -7,7 +7,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         @if(session('message'))
-            <x-error-msg message="{{ session('message') }}" />
+        <x-error-msg message="{{ session('message') }}" />
         @endif
         <div class="bg-white p-6 shadow sm:rounded-lg flex">
             <div class="w-[23%] flex flex-col">
@@ -170,84 +170,76 @@
                             <strong class="text-sm">Edit</strong>
                         </a>
                         @endif
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
+                        <a href="{{ route('anime.characters.all', ['anime' => $anime->id]) }}" class="text-link-blue">
                             <strong class="text-sm">More characters</strong>
                         </a>
                     </div>
                 </div>
-                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300">
+
                 <div class="flex">
-                    <table class="w-1/2 float-left">
-                        <tbody>
-                            @php
-                            $characters = $anime->Anime_Character->sortBy('role')->take(10);
-                            $leftSide = $characters->slice(0, 5);
-                            @endphp
-                            @foreach($leftSide as $animeCharacter)
-                            @php
-                            $character = $animeCharacter->Character;
-                            $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
-                            @endphp
-                            <tr class="{{ $bgColor }}">
-                                <td class="">
-                                    @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
-                                    <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
-                                    @else
-                                    <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
-                                    @endif
-                                </td>
-                                <td class="py-2 align-top">
-                                    <div class="ml-[-4rem]">
-                                        <p class="text-mal-blue">{{ $character->name }}</p>
-                                        <p class="text-xs">{{ $animeCharacter->role }}</p>
-                                    </div>
-                                </td>
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="my-1 border-t-2 border-gray-100">
-                                </td>
-                            </tr>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="w-1/2 float-left">
+                        @php
+                        $characters = $anime->Anime_Character->sortBy('role')->take(10);
+                        $leftSide = $characters->slice(0, 5);
+                        @endphp
+                        @foreach($leftSide as $animeCharacter)
+                        @php
+                        $character = $animeCharacter->Character;
+                        $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
+                        @endphp
+                        <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100">
+                            <div class="">
+                                @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
+                                <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                @else
+                                <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                @endif
+                            </div>
+                            <div class="ml-2">
+                                <p class="text-mal-blue">
+                                    <a href="{{ route('characters.show', ['character' => $character]) }}">
+                                        {{ $character->name }}
+                                    </a>
+                                </p>
+                                <p class="text-xs">{{ $animeCharacter->role }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
 
                     <div class="border-r border-gray-300 h-84 mx-2"></div>
 
-                    <table class="w-1/2 float-left">
-                        <tbody>
-                            @php
-                            $rightSide = $characters->slice(5);
-                            @endphp
-                            @foreach($rightSide as $animeCharacter)
-                            @php
-                            $character = $animeCharacter->Character;
-                            $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
-                            @endphp
-                            <tr class="{{ $bgColor }}">
-                                <td class="">
-                                    @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
-                                    <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
-                                    @else
-                                    <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
-                                    @endif
-                                </td>
-                                <td class="py-2 align-top">
-                                    <div class="ml-[-2rem]">
-                                        <p class="text-mal-blue">{{ $character->name }}</p>
-                                        <p class="text-xs">{{ $animeCharacter->role }}</p>
-                                    </div>
-                                </td>
-                            <tr>
-                                <td colspan="2">
-                                    <hr class="my-1 border-t-2 border-gray-100">
-                                </td>
-                            </tr>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="w-1/2 float-left">
+                        @php
+                        $rightSide = $characters->slice(5);
+                        @endphp
+                        @foreach($rightSide as $animeCharacter)
+                        @php
+                        $character = $animeCharacter->Character;
+                        $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
+                        @endphp
+                        <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100">
+                            <div class="">
+                                @if (filter_var($character->profile_picture, FILTER_VALIDATE_URL))
+                                <img src="{{ $character->profile_picture }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                @else
+                                <img src="{{ asset('storage/' . $character->profile_picture) }}" alt="{{ $character->title }}" class="w-[3rem] h-[4rem] object-cover">
+                                @endif
+                            </div>
+                            <div class="ml-2">
+                                <p class="text-mal-blue">
+                                    <a href="{{ route('characters.show', ['character' => $character]) }}">
+                                        {{ $character->name }}
+                                    </a>
+                                </p>
+                                <p class="text-xs">{{ $animeCharacter->role }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
+
                 {{-- Staff --}}
                 <div class="mt-2 flex justify-between">
                     <h1 class="text-black">
@@ -255,13 +247,69 @@
                     </h1>
                     <div class="ml-auto">
                         @if (auth()->user()->isAdmin === 1)
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
+                        <a href="{{ route('anime.staff.createConnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
                             <strong class="text-sm">Edit</strong>
                         </a>
                         @endif
-                        <a href="{{ route('anime.characters.createconnection', ['anime' => $anime->id]) }}" class="text-link-blue">
-                            <strong class="text-sm">More staff</strong>
+                        <a href="{{ route('anime.staff.all', ['anime' => $anime->id]) }}" class="text-link-blue">
+                            <strong class="text-sm">More Staff</strong>
                         </a>
+                    </div>
+                </div>
+
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
+
+                <div class="flex">
+                    @php
+                    $staffMembers = $anime->Anime_Staff->take(4);
+                    @endphp
+
+                    <div class="w-1/2">
+                        @foreach($staffMembers->take(2) as $animeStaff)
+                        @php
+                        $staff = $animeStaff->Staff;
+                        $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
+                        @endphp
+                        <a href="{{ route('staff.show', ['staff' => $staff->id]) }}" class="block text-black text-decoration-none focus:outline-none">
+                            <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100 cursor-pointer">
+                                <div class="">
+                                    @if (filter_var($staff->profile_picture, FILTER_VALIDATE_URL))
+                                    <img src="{{ $staff->profile_picture }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @else
+                                    <img src="{{ asset('storage/' . $staff->profile_picture) }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @endif
+                                </div>
+                                <div class="ml-2">
+                                    <p class="text-mal-blue">{{ $staff->name }}</p>
+                                    <p class="text-xs">{{ $animeStaff->role }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+
+                    <div class="w-1/2">
+                        @foreach($staffMembers->slice(2) as $animeStaff)
+                        @php
+                        $staff = $animeStaff->Staff;
+                        $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
+                        @endphp
+                        <a href="{{ route('staff.show', ['staff' => $staff->id]) }}" class="block text-black text-decoration-none focus:outline-none">
+                            <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100 cursor-pointer">
+                                <div class="">
+                                    @if (filter_var($staff->profile_picture, FILTER_VALIDATE_URL))
+                                    <img src="{{ $staff->profile_picture }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @else
+                                    <img src="{{ asset('storage/' . $staff->profile_picture) }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @endif
+                                </div>
+                                <div class="ml-2">
+                                    <p class="text-mal-blue">{{ $staff->name }}</p>
+                                    <p class="text-xs">{{ $animeStaff->role }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
                     </div>
                 </div>
 
@@ -344,7 +392,7 @@
                         </div>
                     </div>
                     @foreach ($latest_reviews as $review)
-                        <x-show-review img="{{ $review -> profile_picture }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" review="{{ $review -> review_id }}"/>
+                    <x-show-review img="{{ $review -> profile_picture }}" title="{{ $review -> title }}" user="{{ $review -> name }}" comment="{{ $review -> comment }}" time="{{ $review -> created_at }}" review="{{ $review -> review_id }}" />
                     @endforeach
                 </div>
             </div>
