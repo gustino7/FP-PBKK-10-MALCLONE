@@ -270,19 +270,21 @@
                         $staff = $animeStaff->Staff;
                         $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
                         @endphp
-                        <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100">
-                            <div class="">
-                                @if (filter_var($staff->profile_picture, FILTER_VALIDATE_URL))
-                                <img src="{{ $staff->profile_picture }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
-                                @else
-                                <img src="{{ asset('storage/' . $staff->profile_picture) }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
-                                @endif
+                        <a href="{{ route('staff.show', ['staff' => $staff->id]) }}" class="block text-black text-decoration-none focus:outline-none">
+                            <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100 cursor-pointer">
+                                <div class="">
+                                    @if (filter_var($staff->profile_picture, FILTER_VALIDATE_URL))
+                                    <img src="{{ $staff->profile_picture }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @else
+                                    <img src="{{ asset('storage/' . $staff->profile_picture) }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @endif
+                                </div>
+                                <div class="ml-2">
+                                    <p class="text-mal-blue">{{ $staff->name }}</p>
+                                    <p class="text-xs">{{ $animeStaff->role }}</p>
+                                </div>
                             </div>
-                            <div class="ml-2">
-                                <p class="text-mal-blue">{{ $staff->name }}</p>
-                                <p class="text-xs">{{ $animeStaff->role }}</p>
-                            </div>
-                        </div>
+                        </a>
                         @endforeach
                     </div>
 
@@ -292,23 +294,24 @@
                         $staff = $animeStaff->Staff;
                         $bgColor = $loop->iteration % 2 === 0 ? 'bg-[#F9F8F9]' : 'bg-white';
                         @endphp
-                        <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100">
-                            <div class="">
-                                @if (filter_var($staff->profile_picture, FILTER_VALIDATE_URL))
-                                <img src="{{ $staff->profile_picture }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
-                                @else
-                                <img src="{{ asset('storage/' . $staff->profile_picture) }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
-                                @endif
+                        <a href="{{ route('staff.show', ['staff' => $staff->id]) }}" class="block text-black text-decoration-none focus:outline-none">
+                            <div class="{{ $bgColor }} flex py-2 border-t-2 border-gray-100 cursor-pointer">
+                                <div class="">
+                                    @if (filter_var($staff->profile_picture, FILTER_VALIDATE_URL))
+                                    <img src="{{ $staff->profile_picture }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @else
+                                    <img src="{{ asset('storage/' . $staff->profile_picture) }}" alt="{{ $staff->name }}" class="w-[3rem] h-[4rem] object-cover">
+                                    @endif
+                                </div>
+                                <div class="ml-2">
+                                    <p class="text-mal-blue">{{ $staff->name }}</p>
+                                    <p class="text-xs">{{ $animeStaff->role }}</p>
+                                </div>
                             </div>
-                            <div class="ml-2">
-                                <p class="text-mal-blue">{{ $staff->name }}</p>
-                                <p class="text-xs">{{ $animeStaff->role }}</p>
-                            </div>
-                        </div>
+                        </a>
                         @endforeach
                     </div>
                 </div>
-
 
                 <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300"> <!-- Add this line for the horizontal rule -->
 

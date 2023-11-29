@@ -45,10 +45,9 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // Staff
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staff.create');
     Route::post('/staff', [StaffController::class, 'store'])->name('staff.store');
-    Route::get('/anime/{anime}/staff/createConnection', [StaffController::class, 'createConnection'])
-        ->name('anime.staff.createConnection');
-    Route::post('/anime/{anime}/staff/store', [StaffController::class, 'storeConnection'])
-        ->name('anime.staff.store');
+    Route::get('/staff/{staff}', [StaffController::class, 'showAnimeography'])->name('staff.show');
+    Route::get('/anime/{anime}/staff/createConnection', [StaffController::class, 'createConnection'])->name('anime.staff.createConnection');
+    Route::post('/anime/{anime}/staff/store', [StaffController::class, 'storeConnection'])->name('anime.staff.store');
     Route::get('/anime/{anime}/staff/all', [StaffController::class, 'showAll'])->name('anime.staff.all');
 
     // Songs

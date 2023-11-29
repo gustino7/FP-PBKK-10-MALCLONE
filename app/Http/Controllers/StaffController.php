@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anime;
+use App\Models\Anime_Staff;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
@@ -73,5 +74,12 @@ class StaffController extends Controller
         $anime->load('Anime_Staff.Staff');
 
         return view('staff.show-all', compact('anime'));
+    }
+
+    public function showAnimeography(Staff $staff)
+    {
+        $animeography = Anime_Staff::where('staff_id', $staff->id)->with('Anime')->get();
+
+        return view('staff.show', compact('staff', 'animeography'));
     }
 }
