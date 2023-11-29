@@ -140,6 +140,14 @@
         <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
             {{ __('Community') }}
         </x-nav-link>
+
+        <div class="flex justify-end">
+            <form action="{{ route('search.index') }}" method="get" class="flex items-center">
+                <input type="text" name="query" placeholder="Search" class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-mal-blue">
+                <button type="submit" class="ml-2 bg-gray-300 text-black py-1 px-2 rounded hover:bg-gray-400 focus:outline-none focus:shadow-outline bg-[#E0E7F4]">Search</button>
+            </form>
+        </div>
+
     </div>
 
 
