@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         ->name('anime.staff.createConnection');
     Route::post('/anime/{anime}/staff/store', [StaffController::class, 'storeConnection'])
         ->name('anime.staff.store');
-
+    Route::get('/anime/{anime}/staff/all', [StaffController::class, 'showAll'])->name('anime.staff.all');
 
     // Songs
     Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');

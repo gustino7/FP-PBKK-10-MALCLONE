@@ -68,11 +68,9 @@ class StaffController extends Controller
             ->with('error', 'Staff is already associated with the anime.');
     }
 
-
-
     public function showAll(Anime $anime)
     {
-        $anime->load('staff');
+        $anime->load('Anime_Staff.Staff');
 
         return view('staff.show-all', compact('anime'));
     }

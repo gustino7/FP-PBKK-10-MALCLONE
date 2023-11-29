@@ -251,8 +251,8 @@
                             <strong class="text-sm">Edit</strong>
                         </a>
                         @endif
-                        <a href="{{ route('anime.staff.createConnection', ['anime' => $anime->id]) }}" class="text-link-blue">
-                            <strong class="text-sm">More staff</strong>
+                        <a href="{{ route('anime.staff.all', ['anime' => $anime->id]) }}" class="text-link-blue">
+                            <strong class="text-sm">More Staff</strong>
                         </a>
                     </div>
                 </div>
