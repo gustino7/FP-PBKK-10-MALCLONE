@@ -7,6 +7,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserAnimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
 /*
@@ -70,6 +71,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/anime/addlist/{id}', [UserAnimeController::class, 'addToList'])->name('anime.addlist');
     Route::post('/anime/removelist/{id}', [UserAnimeController::class, 'removeToList'])->name('anime.removelist');
     Route::get('/anime/season/{year}/{season}', [AnimeController::class, 'seasonalAnime'])->where(['year' => '\d{4}', 'season' => 'winter|spring|summer|fall'])->name('anime.season');
+
+    // Search
+    Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
     // Community
     Route::get('/community', function () {
