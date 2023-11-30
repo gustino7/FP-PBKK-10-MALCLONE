@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 use App\Models\Anime;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AnimeController extends Controller
 {
@@ -139,11 +141,39 @@ class AnimeController extends Controller
         $startMonth = $this->getStartMonth($season);
         $endMonth = $this->getEndMonth($season);
 
-        // Fetch anime for the selected season and year
-        $seasonalAnimes = Anime::whereYear('premiered', $year)
-            ->whereMonth('premiered', '>=', $startMonth)
-            ->whereMonth('premiered', '<=', $endMonth)
-            ->get();
+        $currentYear = Carbon::now()->year;
+
+        // Check if the requested year is the current year
+        if ($year == $currentYear) {
+            $cacheKey = 'seasonal_anime_' . $currentYear;
+
+            // Check if data is in cache
+            if (Cache::has($cacheKey)) {
+                Log::info('Data found in cache for key: ' . $cacheKey);
+                $seasonalAnimes = Cache::get($cacheKey);
+            } else {
+                Log::info('Cache miss for key: ' . $cacheKey);
+
+                // Determine the start and end months for the selected season
+                $startMonth = $this->getStartMonth($season);
+                $endMonth = $this->getEndMonth($season);
+
+                // Fetch anime for the selected season and year
+                $seasonalAnimes = Anime::whereYear('premiered', $currentYear)
+                    ->whereMonth('premiered', '>=', $startMonth)
+                    ->whereMonth('premiered', '<=', $endMonth)
+                    ->get();
+
+                // Cache the data
+                Cache::put($cacheKey, $seasonalAnimes, now()->addHours(24));
+            }
+        } else {
+            // Handle the case for years other than the current year without caching
+            $seasonalAnimes = Anime::whereYear('premiered', $year)
+                ->whereMonth('premiered', '>=', $startMonth)
+                ->whereMonth('premiered', '<=', $endMonth)
+                ->get();
+        }
 
         // Calculate previous and next year and season
         $prevYear = $year - 1;
@@ -165,6 +195,7 @@ class AnimeController extends Controller
         // Pass the data to the view
         return view('seasonal-anime', compact('seasonalAnimes', 'season', 'year', 'prevYear', 'nextYear', 'prevSeason', 'nextSeason', 'seasons'));
     }
+
 
     private function getStartMonth($season)
     {
