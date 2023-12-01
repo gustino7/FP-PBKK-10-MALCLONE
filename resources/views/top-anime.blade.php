@@ -41,7 +41,7 @@
                                             </h2>
                                             <p class="text-sm text-gray-600">{{ $anime->type }} ({{ $anime->episode }} episodes)</p>
                                             <p class="text-sm text-gray-600">Premiered: {{ $anime->premiered }}</p>
-                                        </div>r
+                                        </div>
                                     </div>
                                 </td>
 
