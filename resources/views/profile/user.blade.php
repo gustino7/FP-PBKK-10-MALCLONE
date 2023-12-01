@@ -24,6 +24,7 @@
 
             <div class="w-full ms-5">
                 <div class="h-16 overflow-hidden text-sm">
+                    <!-- User Description -->
                     @if ($user->description)
                     {{ $user->description }}
                     @else
@@ -33,9 +34,35 @@
                 <p class="text-black">
                     <strong>Statistics</strong>
                 </p>
-                <hr class="my-2 border-t-2 border-gray-300">
-            </div>
 
+                <hr class="my-2 border-t-2 border-gray-300">
+
+                <!-- User Anime Statistics -->
+                <div class="flex">
+                    <!-- Total Entries, Watch Time, and Status -->
+                    <div class="w-1/2">
+                        <p class="text-black">Total Entries: {{ $user->user_anime_count }}</p>
+                        <p class="text-black">Total Watch Time: {{ $user->total_watch_time }} hours</p>
+
+                        <!-- User Status for Watched Anime -->
+                        <p class="text-black">Status:</p>
+                        <ul>
+                            <li>Watching: {{ $user->Review()->where('status', 'Watching')->count() }}</li>
+                            <li>Completed: {{ $user->Review()->where('status', 'Completed')->count() }}</li>
+                            <li>On-Hold: {{ $user->Review()->where('status', 'On-Hold')->count() }}</li>
+                            <li>Dropped: {{ $user->Review()->where('status', 'Dropped')->count() }}</li>
+                            <li>Plan To Watch: {{ $user->Review()->where('status', 'Plan To Watch')->count() }}</li>
+                        </ul>
+                    </div>
+
+                    <!-- Staff Members Section -->
+                    <div class="w-1/2">
+                        <!-- ... (Your existing code for displaying staff members) -->
+                    </div>
+                </div>
+
+                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300">
+            </div>
         </div>
     </div>
 </x-app-layout>
