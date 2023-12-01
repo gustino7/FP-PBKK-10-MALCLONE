@@ -47,11 +47,26 @@
                         <!-- User Status for Watched Anime -->
                         <p class="text-black">Status:</p>
                         <ul>
-                            <li>Watching: {{ $user->Review()->where('status', 'Watching')->count() }}</li>
-                            <li>Completed: {{ $user->Review()->where('status', 'Completed')->count() }}</li>
-                            <li>On-Hold: {{ $user->Review()->where('status', 'On-Hold')->count() }}</li>
-                            <li>Dropped: {{ $user->Review()->where('status', 'Dropped')->count() }}</li>
-                            <li>Plan To Watch: {{ $user->Review()->where('status', 'Plan To Watch')->count() }}</li>
+                            <li>
+                                Watching: {{ $user->Review()->where('status', 'Watching')->count() }}
+                                <svg height="12" width="12" class="statusCircle" style="background-color: #3498db;"></svg>
+                            </li>
+                            <li>
+                                Completed: {{ $user->Review()->where('status', 'Completed')->count() }}
+                                <svg height="12" width="12" class="statusCircle" style="background-color: #2ecc71;"></svg>
+                            </li>
+                            <li>
+                                On-Hold: {{ $user->Review()->where('status', 'On-Hold')->count() }}
+                                <svg height="12" width="12" class="statusCircle" style="background-color: #f39c12;"></svg>
+                            </li>
+                            <li>
+                                Dropped: {{ $user->Review()->where('status', 'Dropped')->count() }}
+                                <svg height="12" width="12" class="statusCircle" style="background-color: #e74c3c;"></svg>
+                            </li>
+                            <li>
+                                Plan To Watch: {{ $user->Review()->where('status', 'Plan To Watch')->count() }}
+                                <svg height="12" width="12" class="statusCircle" style="background-color: #9b59b6;"></svg>
+                            </li>
                         </ul>
                     </div>
 

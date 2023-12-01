@@ -21,6 +21,13 @@ export default {
             maxWidth: {
                 'custom': '75.5rem', // 86rem is 528px, which is in between 6xl and 7xl
             },
+            statusCircle: {
+                width: '12px',
+                height: '12px',
+                display: 'inline-block',
+                borderRadius: '50%',
+                marginRight: '5px',
+            },
         },
     },
 
