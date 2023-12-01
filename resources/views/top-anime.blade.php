@@ -41,12 +41,23 @@
                                             </h2>
                                             <p class="text-sm text-gray-600">{{ $anime->type }} ({{ $anime->episode }} episodes)</p>
                                             <p class="text-sm text-gray-600">Premiered: {{ $anime->premiered }}</p>
-                                        </div>
+                                        </div>r
                                     </div>
                                 </td>
 
                                 <td class="px-4 py-2 border-b border-r text-center">{{ $anime->avg_rating }}</td>
-                                <td class="px-4 py-2 border-b border-r text-center">{{ $anime->your_score }}</td>
+                                    @if ($user)
+                                    @php
+                                    $userReview = $user->Review()->where('anime_id', $anime->id)->first();
+                                    @endphp
+
+                                <td class="px-4 py-2 border-b border-r text-center">
+                                    @if ($userReview)
+                                    {{ $userReview->rating }}
+                                    @endif
+                                </td>
+                                @endif
+                                </td>
                                 <td class="px-4 py-2 border-b text-center">{{ $anime->status }}</td>
                             </tr>
                             @endforeach
