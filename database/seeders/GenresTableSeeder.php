@@ -15,7 +15,6 @@ class GenresTableSeeder extends Seeder
             'Adventure',
             'Avant Garde',
             'Award Winning',
-            'Boys Love',
             'Comedy',
             'Drama',
             'Fantasy',
