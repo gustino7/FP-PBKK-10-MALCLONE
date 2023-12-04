@@ -12,6 +12,7 @@ class Studio extends Model
     protected $fillable = [
         "name",
         "established",
+        "profile_picture",
         "description"
     ];
 

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(GenresTableSeeder::class);
+        $this->call(StudioSeeder::class);
         $this->call([
             UsersSeeder::class,
         ]);
