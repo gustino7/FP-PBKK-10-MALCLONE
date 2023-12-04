@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Anime;
 use App\Models\Genre;
+use App\Models\Studio;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -283,5 +284,28 @@ class AnimeController extends Controller
         })->get();
 
         return view('anime.genre', compact('genreAnimes', 'genre'));
+    }
+
+    public function createStudioConnection(Anime $anime)
+    {
+        $studios = Studio::all();
+
+        return view('studio.create-connection', compact('anime', 'studios'));
+    }
+
+    public function storeStudioConnection(Request $request, Anime $anime)
+    {
+        // Validate the request data
+        $request->validate([
+            'studio_id' => 'required|exists:studios,id',
+        ]);
+
+        // Create the Anime_Studio connection
+        $anime->Anime_Studio()->create([
+            'studio_id' => $request->input('studio_id'),
+        ]);
+
+        return redirect()->route('anime.show', ['id' => $anime->id])
+            ->with('success', 'Studio added successfully.');
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anime_Studio extends Model
 {
+    protected $table = 'anime_studios';
+
     use HasFactory;
 
     protected $fillable = [
@@ -14,11 +16,13 @@ class Anime_Studio extends Model
         "studio_id",
     ];
 
-    public function Anime(){
+    public function Anime()
+    {
         return $this->belongsTo(Anime::class);
     }
 
-    public function Studio(){
+    public function Studio()
+    {
         return $this->belongsTo(Studio::class);
     }
 }
