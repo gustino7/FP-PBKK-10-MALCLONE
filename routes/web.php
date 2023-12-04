@@ -52,6 +52,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::post('/anime/{anime}/staff/store', [StaffController::class, 'storeConnection'])->name('anime.staff.store');
     Route::get('/anime/{anime}/staff/all', [StaffController::class, 'showAll'])->name('anime.staff.all');
 
+    // Genre
+    Route::get('/anime/{anime}/genre/createConnection', [AnimeController::class, 'createGenreConnection'])->name('genre.createConnection');
+    Route::post('/anime/{anime}/genre/storeConnection', [AnimeController::class, 'storeGenreConnection'])->name('genre.store');
+    Route::get('/anime/genre/{genre}', [AnimeController::class, 'showAnimeByGenre'])
+        ->name('anime.genre');
+
     // Songs
     Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');
     Route::post('/anime/{anime}/songs', [SongController::class, 'store'])->name('songs.store');
