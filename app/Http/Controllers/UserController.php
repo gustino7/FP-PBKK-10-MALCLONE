@@ -16,4 +16,28 @@ class UserController extends Controller
 
         return view('profile.user', compact('user', 'isAuthenticated'));
     }
+
+    public function animeList($username, $status)
+    {
+        $user = User::where('name', $username)->first();
+
+        if (!$user) {
+            abort(404); 
+        }
+
+        $reviews = $user->Review()->where('status', $status)->get();
+
+        return view('user.animeList', [
+            'user' => $user,
+            'status' => $status,
+            'reviews' => $reviews,
+        ]);
+    }
+
+    public function animeListStatus($userId, $status)
+    {
+        $user = User::findOrFail($userId);
+
+        return view('user.animeList', ['user' => $user, 'status' => $status]);
+    }
 }
