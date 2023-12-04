@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.p
 Route::get('/profile/{username}/{status}', [UserController::class, 'animeList'])->name('user.animeList');
 Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
+Route::get('/studio/{studio}', [StudioController::class, 'show'])->name('studio.show');
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
@@ -57,6 +59,13 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::post('/anime/{anime}/genre/storeConnection', [AnimeController::class, 'storeGenreConnection'])->name('genre.store');
     Route::get('/anime/genre/{genre}', [AnimeController::class, 'showAnimeByGenre'])
         ->name('anime.genre');
+
+    // Staff
+    Route::get('/studio/create', [StudioController::class, 'create'])->name('studio.create');
+    Route::post('/studio/store', [StudioController::class, 'store'])->name('studio.store');
+    Route::get('/anime/{anime}/studio/createConnection', [AnimeController::class, 'createStudioConnection'])->name('studio.createConnection');
+    Route::post('/anime/{anime}/studio/storeConnection', [AnimeController::class, 'storeStudioConnection'])->name('studio.storeConnection');
+    Route::get('/anime/studio/{studio}', [AnimeController::class, 'showByStudio'])->name('anime.studio');
 
     // Songs
     Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');

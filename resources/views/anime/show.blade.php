@@ -101,6 +101,20 @@
                     <p class="text-gray-600">
                         <strong>Status:</strong> {{ $anime->status }}
                     </p>
+
+
+                    @if (auth()->user()->isAdmin === 1)
+                    <a href="{{ route('genre.createConnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
+                        <strong class="text-sm">Edit Genres</strong>
+                    </a>
+                    @endif
+
+                    @if (auth()->user()->isAdmin === 1)
+                    <a href="{{ route('studio.createConnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
+                        <strong class="text-sm">Edit Studio</strong>
+                    </a>
+                    @endif
+
                     <p class="text-gray-600">
                         <strong>Genres:</strong>
                         @foreach($anime->Anime_Genre as $key => $animeGenre)
@@ -111,11 +125,15 @@
                             @endforeach
                     </p>
 
-                    @if (auth()->user()->isAdmin === 1)
-                    <a href="{{ route('genre.createConnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
-                        <strong class="text-sm">Edit Genres</strong>
-                    </a>
-                    @endif
+                    <p class="text-gray-600">
+                        <strong>Studios:</strong>
+                        @foreach($anime->Anime_Studio as $key => $animeStudio)
+                        <a href="{{ route('studio.show', ['studio' => $animeStudio->Studio->id]) }}" class="text-link-blue">{{ $animeStudio->Studio->name }}</a>
+                        @if ($key < count($anime->Anime_Studio) - 1)
+                            <span class="text-black">,</span>
+                            @endif
+                            @endforeach
+                    </p>
                 </div>
             </div>
 
