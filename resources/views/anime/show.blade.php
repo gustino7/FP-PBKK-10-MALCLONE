@@ -192,10 +192,10 @@
                         {{ $anime->synopsis }}
                     </div>
                 </div>
-                {{-- Character Voice Actor --}}
+                {{-- Character --}}
                 <div class="mt-4 flex justify-between">
                     <h1 class="text-black">
-                        <strong>Characters & Voice Actors</strong>
+                        <strong>Characters</strong>
                     </h1>
                     <div class="ml-auto">
                         @if (auth()->user()->isAdmin === 1)

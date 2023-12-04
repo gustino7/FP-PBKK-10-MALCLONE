@@ -95,10 +95,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Search
     Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
-    // Community
-    Route::get('/community', function () {
-        return view('community');
-    })->name('community');
     Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 });
 

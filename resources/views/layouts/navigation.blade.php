@@ -140,10 +140,7 @@
                 {{ __('Seasonal Anime') }}
             </x-nav-link>
     
-    
-            <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
-                {{ __('Community') }}
-            </x-nav-link>
+
     
         </div>        
         <div class="">
