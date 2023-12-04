@@ -23,11 +23,13 @@ use App\Http\Controllers\UserController;
 
 // Role Guest
 Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
-Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
 Route::get('/', function () {
     return redirect()->route('dashboard');
 });
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 // Role Admin
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
@@ -79,6 +81,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/community', function () {
         return view('community');
     })->name('community');
+    Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 });
 
 Route::middleware('auth')->group(function () {
