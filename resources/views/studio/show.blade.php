@@ -11,7 +11,7 @@
                 @if (filter_var($studio->profile_picture, FILTER_VALIDATE_URL))
                 <img src="{{ $studio->profile_picture }}" alt="{{ $studio->title }}" class="w-full h-72 object-cover rounded-md mb-4">
                 @else
-                <img src="{{ asset('storage/profile_pictures/' . $studio->profile_picture) }}" alt="{{ $studio->title }}" class="w-full h-72 object-cover rounded-md mb-4">
+                <img src="{{ asset('storage/' . $studio->profile_picture) }}" alt="{{ $studio->title }}" class="w-full h-72 object-cover rounded-md mb-4">
                 @endif
 
             </div>

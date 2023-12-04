@@ -116,11 +116,12 @@ class AnimeController extends Controller
 
     public function getAllDashboard()
     {
-        if(auth()->check() && !Auth::user()->email_verified_at){
+        if (auth()->check() && !Auth::user()->email_verified_at) {
             return redirect()->route('verification.notice');
-        };
-        
+        }
+
         Carbon::setLocale('en');
+
         $latest_reviews = DB::table('reviews')
             ->join('users', 'reviews.user_id', '=', 'users.id')
             ->join('animes', 'reviews.anime_id', '=', 'animes.id')
@@ -134,12 +135,26 @@ class AnimeController extends Controller
             $created_at_time = Carbon::parse($review->created_at);
             $review->created_at = $current_time->diffForHumans($created_at_time, true);
         }
+
+        // Fetch anime for each genre
+        $genreAnimes = [];
+        $genres = ['Action', 'Slice of Life'];  // Add more genres as needed
+
+        foreach ($genres as $genre) {
+            $genreAnimes[$genre] = Anime::whereHas('Anime_Genre', function ($query) use ($genre) {
+                $query->whereHas('Genre', function ($innerQuery) use ($genre) {
+                    $innerQuery->where('name', $genre);
+                });
+            })->get();
+        }
+
         return view('dashboard')->with([
             'animes_tv' => Anime::where('type', 'TV')->get(),
             'animes_latest' => Anime::orderBy('updated_at', 'desc')->get(),
             'animes_upcoming' => Anime::where('status', 'Not Yet Aired')->take(5)->get(),
             'animes_top' => Anime::orderBy('avg_rating', 'desc')->take(5)->get(),
-            'reviews' => $latest_reviews
+            'reviews' => $latest_reviews,
+            'genreAnimes' => $genreAnimes,
         ]);
     }
 
