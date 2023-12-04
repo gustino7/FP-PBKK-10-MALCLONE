@@ -27,7 +27,7 @@
                         <p class="bg-gray-100 text-sm text-gray-600 text-center">{{ $anime->premiered }} | Episode {{ $anime->episode }}</p>
                         <div class="mt-4 flex-grow flex">
                             <img src="{{ filter_var($anime->poster, FILTER_VALIDATE_URL) ? $anime->poster : asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="w-1/2 h-64 object-cover rounded mb-2 mr-4">
-                            <p class="text-sm text-gray-600 flex-grow">{{ $anime->synopsis }}</p>
+                            <p class="text-sm text-gray-600 flex-grow line-clamp-3">{{ $anime->synopsis }}</p>
                         </div>
                         <div class="flex items-center ml-2">
                             <p class="text-sm text-gray-600 flex items-center">
