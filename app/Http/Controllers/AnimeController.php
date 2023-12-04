@@ -8,6 +8,7 @@ use App\Models\User_Anime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Anime;
+use App\Models\Genre;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -104,7 +105,7 @@ class AnimeController extends Controller
 
         // Event for notification
         $user = Auth::user();
-        $title = $request -> title;
+        $title = $request->title;
         $name = $user->name;
 
         event(new AnimeCreated($title, $name));
@@ -256,5 +257,31 @@ class AnimeController extends Controller
 
         return redirect()->route('anime.show', ['id' => $anime->id])
             ->with('success', 'Staff members added successfully.');
+    }
+
+    public function createGenreConnection(Anime $anime)
+    {
+        $genres = Genre::all();
+
+        return view('genre.create-connection', compact('anime', 'genres'));
+    }
+
+    public function storeGenreConnection(Request $request, Anime $anime)
+    {
+        $anime->Anime_Genre()->create($request->only('genre_id'));
+
+        return redirect()->route('anime.show', ['id' => $anime->id])
+            ->with('success', 'Genre added successfully.');
+    }
+
+    public function showAnimeByGenre($genre)
+    {
+        $genreAnimes = Anime::whereHas('Anime_Genre', function ($query) use ($genre) {
+            $query->whereHas('Genre', function ($innerQuery) use ($genre) {
+                $innerQuery->where('name', $genre);
+            });
+        })->get();
+
+        return view('anime.genre', compact('genreAnimes', 'genre'));
     }
 }

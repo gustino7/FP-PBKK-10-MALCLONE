@@ -23,6 +23,8 @@ use App\Http\Controllers\UserController;
 
 // Role Guest
 Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
+Route::get('/profile/{username}/{status}', [UserController::class, 'animeList'])->name('user.animeList');
+Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -52,6 +54,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/anime/{anime}/staff/createConnection', [StaffController::class, 'createConnection'])->name('anime.staff.createConnection');
     Route::post('/anime/{anime}/staff/store', [StaffController::class, 'storeConnection'])->name('anime.staff.store');
     Route::get('/anime/{anime}/staff/all', [StaffController::class, 'showAll'])->name('anime.staff.all');
+
+    // Genre
+    Route::get('/anime/{anime}/genre/createConnection', [AnimeController::class, 'createGenreConnection'])->name('genre.createConnection');
+    Route::post('/anime/{anime}/genre/storeConnection', [AnimeController::class, 'storeGenreConnection'])->name('genre.store');
+    Route::get('/anime/genre/{genre}', [AnimeController::class, 'showAnimeByGenre'])
+        ->name('anime.genre');
 
     // Songs
     Route::get('/anime/{anime}/songs/create', [SongController::class, 'create'])->name('songs.create');

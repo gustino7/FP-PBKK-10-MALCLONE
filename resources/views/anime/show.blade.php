@@ -101,6 +101,21 @@
                     <p class="text-gray-600">
                         <strong>Status:</strong> {{ $anime->status }}
                     </p>
+                    <p class="text-gray-600">
+                        <strong>Genres:</strong>
+                        @foreach($anime->Anime_Genre as $key => $animeGenre)
+                        <a href="{{ route('anime.genre', ['genre' => $animeGenre->Genre->name]) }}" class="text-link-blue">{{ $animeGenre->Genre->name }}</a>
+                        @if ($key < count($anime->Anime_Genre) - 1)
+                            <span class="text-black">,</span>
+                            @endif
+                            @endforeach
+                    </p>
+
+                    @if (auth()->user()->isAdmin === 1)
+                    <a href="{{ route('genre.createConnection', ['anime' => $anime->id]) }}" class="text-link-blue me-6">
+                        <strong class="text-sm">Edit Genres</strong>
+                    </a>
+                    @endif
                 </div>
             </div>
 
