@@ -175,8 +175,8 @@ class AnimeController extends Controller
         $currentYear = Carbon::now()->year;
 
         // Check if the requested year is the current year
-        if ($year == $currentYear) {
-            $cacheKey = 'seasonal_anime_' . $currentYear;
+        if ($year == $currentYear && $season == 'fall') {
+            $cacheKey = 'seasonal_anime_fall_' . $currentYear;
 
             // Check if data is in cache
             if (Cache::has($cacheKey)) {
@@ -184,10 +184,6 @@ class AnimeController extends Controller
                 $seasonalAnimes = Cache::get($cacheKey);
             } else {
                 Log::info('Cache miss for key: ' . $cacheKey);
-
-                // Determine the start and end months for the selected season
-                $startMonth = $this->getStartMonth($season);
-                $endMonth = $this->getEndMonth($season);
 
                 // Fetch anime for the selected season and year
                 $seasonalAnimes = Anime::whereYear('premiered', $currentYear)
@@ -199,7 +195,7 @@ class AnimeController extends Controller
                 Cache::put($cacheKey, $seasonalAnimes, now()->addHours(24));
             }
         } else {
-            // Handle the case for years other than the current year without caching
+            // Handle the case for years other than the current year or seasons other than fall without caching
             $seasonalAnimes = Anime::whereYear('premiered', $year)
                 ->whereMonth('premiered', '>=', $startMonth)
                 ->whereMonth('premiered', '<=', $endMonth)
@@ -226,6 +222,7 @@ class AnimeController extends Controller
         // Pass the data to the view
         return view('seasonal-anime', compact('seasonalAnimes', 'season', 'year', 'prevYear', 'nextYear', 'prevSeason', 'nextSeason', 'seasons'));
     }
+
 
 
     private function getStartMonth($season)
