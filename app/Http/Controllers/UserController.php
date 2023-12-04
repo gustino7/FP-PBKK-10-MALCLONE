@@ -10,6 +10,10 @@ class UserController extends Controller
 {
     public function show($username)
     {
+        if(auth()->check() && !Auth::user()->email_verified_at){
+            return redirect()->route('verification.notice');
+        };
+        
         $user = User::where('name', $username)->firstOrFail();
 
         $isAuthenticated = Auth::check();

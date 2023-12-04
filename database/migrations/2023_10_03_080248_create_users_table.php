@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->boolean('is_premium')->default(0);
             $table->string('wallpaper')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

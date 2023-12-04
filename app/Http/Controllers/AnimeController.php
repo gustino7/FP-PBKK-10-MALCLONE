@@ -115,6 +115,10 @@ class AnimeController extends Controller
 
     public function getAllDashboard()
     {
+        if(auth()->check() && !Auth::user()->email_verified_at){
+            return redirect()->route('verification.notice');
+        };
+        
         Carbon::setLocale('en');
         $latest_reviews = DB::table('reviews')
             ->join('users', 'reviews.user_id', '=', 'users.id')

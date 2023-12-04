@@ -127,24 +127,26 @@
             </div>
         </div>
     </div>
-    <div class="hidden space-x-8 sm:flex max-w-custom mx-auto px-3 sm:px-3 lg:px-3 py-2 bg-mal-blue">
-        <x-nav-link :href="route('topanime')" :active="request()->routeIs('topanime')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
-            {{ __('Top Anime') }}
-        </x-nav-link>
-
-        <x-nav-link :href="route('anime.season', ['year' => 2023, 'season' => 'fall'])" :active="request()->routeIs('anime.season')" class="text-white font-black hover:text-black hover:bg-gray-300">
-            {{ __('Seasonal Anime') }}
-        </x-nav-link>
-
-
-        <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
-            {{ __('Community') }}
-        </x-nav-link>
-
-        <div class="flex justify-end">
+    <div class="space-x-8 flex flex-row gap-x-[30rem] items-center mx-auto max-w-custom px-3 sm:px-3 lg:px-3 py-2 bg-mal-blue">
+        <div class="flex flex-row gap-x-14">
+            <x-nav-link :href="route('topanime')" :active="request()->routeIs('topanime')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
+                {{ __('Top Anime') }}
+            </x-nav-link>
+    
+            <x-nav-link :href="route('anime.season', ['year' => 2023, 'season' => 'fall'])" :active="request()->routeIs('anime.season')" class="text-white font-black hover:text-black hover:bg-gray-300">
+                {{ __('Seasonal Anime') }}
+            </x-nav-link>
+    
+    
+            <x-nav-link :href="route('community')" :active="request()->routeIs('community')" class="text-white font-black hover:text-black hover:bg-gray-300 ">
+                {{ __('Community') }}
+            </x-nav-link>
+    
+        </div>        
+        <div class="">
             <form action="{{ route('search.index') }}" method="get" class="flex items-center">
                 <input type="text" name="query" placeholder="Search" class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-mal-blue">
-                <button type="submit" class="ml-2 bg-gray-300 text-black py-1 px-2 rounded hover:bg-gray-400 focus:outline-none focus:shadow-outline bg-[#E0E7F4]">Search</button>
+                <button type="submit" class="ml-2 text-black py-1 px-2 rounded hover:bg-gray-400 focus:outline-none focus:shadow-outline bg-[#E0E7F4]">Search</button>
             </form>
         </div>
 
