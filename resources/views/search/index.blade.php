@@ -29,7 +29,7 @@
                             @if (filter_var($anime->poster, FILTER_VALIDATE_URL))
                             <img src="{{ $anime->poster }}" alt="{{ $anime->title }}" class="w-[3rem] h-[4rem] object-cover ">
                             @else
-                            <img src="{{ asset('storage/' . $anime->image_path) }}" alt="{{ $anime->title }}" class="w-[3rem] h-[4rem]">
+                            <img src="{{ asset('storage/posters/' . $anime->poster) }}" alt="{{ $anime->title }}" class="w-[3rem] h-[4rem]  object-cover">
                             @endif
                             <div class="ml-4">
                                 <span>{{ $anime->title }}</span>

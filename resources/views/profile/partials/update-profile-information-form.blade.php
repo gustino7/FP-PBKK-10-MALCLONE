@@ -61,13 +61,6 @@
             <x-input-error class="mt-2" :messages="$errors->get('profile_picture')" />
         </div>
 
-        <!-- Wallpaper -->
-        <div>
-            <x-input-label for="wallpaper" :value="__('Wallpaper')" />
-            <input id="wallpaper" name="wallpaper" type="file" class="mt-1 block w-full" accept="image/*">
-            <x-input-error class="mt-2" :messages="$errors->get('wallpaper')" />
-        </div>
-
         <div class="flex items-center gap-4">
             <x-primary-button class="bg-mal-blue">{{ __('Save') }}</x-primary-button>
 
