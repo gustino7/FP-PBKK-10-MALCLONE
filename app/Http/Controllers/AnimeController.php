@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AnimeCreated;
 use App\Models\Review;
 use App\Models\User_Anime;
 use Carbon\Carbon;
@@ -100,6 +101,13 @@ class AnimeController extends Controller
             'season' => $seasonYear, // Save the season and year
             'poster' => $imageName,
         ]);
+
+        // Event for notification
+        $user = Auth::user();
+        $title = $request -> title;
+        $name = $user->name;
+
+        event(new AnimeCreated($title, $name));
 
         return redirect()->route('dashboard');
     }
