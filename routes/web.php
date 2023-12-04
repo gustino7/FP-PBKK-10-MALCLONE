@@ -23,6 +23,7 @@ use App\Http\Controllers\UserController;
 
 // Role Guest
 Route::get('/profile/{username}', [UserController::class, 'show'])->name('user.profile');
+Route::get('/profile/{username}/{status}', [UserController::class, 'animeList'])->name('user.animeList');
 Route::get('/thumbnail/{filename}', [ProfileController::class, 'thumbnail'])->name('thumbnail');
 Route::get('/dashboard', [AnimeController::class, 'getAllDashboard'])->name('dashboard');
 Route::get('/', function () {

@@ -37,46 +37,67 @@
 
                 <hr class="my-2 border-t-2 border-gray-300">
 
+                <p class="text-black mt-3">
+                <h3>Anime Stats</h3>
+                </p>
+
+                <hr class="my-2 border-t-2 border-gray-300">
                 <!-- User Anime Statistics -->
                 <div class="flex">
                     <!-- Total Entries, Watch Time, and Status -->
                     <div class="w-1/2">
-                        <p class="text-black">Total Entries: {{ $user->user_anime_count }}</p>
-                        <p class="text-black">Total Watch Time: {{ $user->total_watch_time }} hours</p>
-
                         <!-- User Status for Watched Anime -->
-                        <p class="text-black">Status:</p>
                         <ul>
-                            <li>
-                                Watching: {{ $user->Review()->where('status', 'Watching')->count() }}
-                                <svg height="12" width="12" class="statusCircle" style="background-color: #3498db;"></svg>
+                            <!-- Watching -->
+                            <li class="flex items-center">
+                                <a href="{{ route('user.animeList', ['username' => $user->name, 'status' => 'Watching']) }}" class="flex items-center">
+                                    <svg height="12" width="12" class="statusCircle" style="background-color: #2CB139; border-radius: 50%;"></svg>
+                                    <span class="ml-2 text-mal-blue">Watching: </span>
+                                    <span>{!! "&nbsp;" !!} {{ $user->Review()->where('status', 'Watching')->count() }}</span>
+                                </a>
                             </li>
-                            <li>
-                                Completed: {{ $user->Review()->where('status', 'Completed')->count() }}
-                                <svg height="12" width="12" class="statusCircle" style="background-color: #2ecc71;"></svg>
+
+                            <!-- Completed -->
+                            <li class="flex items-center">
+                                <a href="{{ route('user.animeList', ['username' => $user->name, 'status' => 'Completed']) }}" class="flex items-center">
+                                    <svg height="12" width="12" class="statusCircle" style="background-color: #26458E; border-radius: 50%;"></svg>
+                                    <span class="ml-2 text-mal-blue">Completed: </span>
+                                    <span>{!! "&nbsp;" !!} {{ $user->Review()->where('status', 'Completed')->count() }}</span>
+                                </a>
                             </li>
-                            <li>
-                                On-Hold: {{ $user->Review()->where('status', 'On-Hold')->count() }}
-                                <svg height="12" width="12" class="statusCircle" style="background-color: #f39c12;"></svg>
+
+
+                            <!-- On-Hold -->
+                            <li class="flex items-center">
+                                <a href="{{ route('user.animeList', ['username' => $user->name, 'status' => 'On-Hold']) }}" class="flex items-center">
+                                    <svg height="12" width="12" class="statusCircle" style="background-color: #E6B714; border-radius: 50%;"></svg>
+                                    <span class="ml-2 text-mal-blue">On-Hold: </span>
+                                    <span> {!! "&nbsp;" !!} {{ $user->Review()->where('status', 'On-Hold')->count() }} </span>
+                                </a>
                             </li>
-                            <li>
-                                Dropped: {{ $user->Review()->where('status', 'Dropped')->count() }}
-                                <svg height="12" width="12" class="statusCircle" style="background-color: #e74c3c;"></svg>
+
+                            <!-- Dropped -->
+                            <li class="flex items-center">
+                                <a href="{{ route('user.animeList', ['username' => $user->name, 'status' => 'Dropped']) }}" class="flex items-center">
+                                    <svg height="12" width="12" class="statusCircle" style="background-color: #A12F31; border-radius: 50%;"></svg>
+                                    <span class="ml-2 text-mal-blue">Dropped: </span>
+                                    <span>{!! "&nbsp;" !!} {{ $user->Review()->where('status', 'Dropped')->count() }}</span>
+                                </a>
                             </li>
-                            <li>
-                                Plan To Watch: {{ $user->Review()->where('status', 'Plan To Watch')->count() }}
-                                <svg height="12" width="12" class="statusCircle" style="background-color: #9b59b6;"></svg>
+
+                            <!-- Plan To Watch -->
+                            <li class="flex items-center">
+                                <a href="{{ route('user.animeList', ['username' => $user->name, 'status' => 'Plan To Watch']) }}" class="flex items-center">
+                                    <svg height="12" width="12" class="statusCircle" style="background-color: #8E8E8F; border-radius: 50%;"></svg>
+                                    <span class="ml-2 text-mal-blue">Plan To Watch: </span>
+                                    <span>{!! "&nbsp;" !!} {{ $user->Review()->where('status', 'Plan To Watch')->count() }}</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- Staff Members Section -->
-                    <div class="w-1/2">
-                        <!-- ... (Your existing code for displaying staff members) -->
-                    </div>
                 </div>
 
-                <hr class="mt-[-5px] mb-2 border-t-2 border-gray-300">
+                <hr class="mt-2 mb-2 border-t-2 border-gray-300">
             </div>
         </div>
     </div>
