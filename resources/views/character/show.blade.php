@@ -50,11 +50,6 @@
                 <p class="text-black">
                     {{ $character->description }}
                 </p>
-
-                <p class="text-black mt-6">
-                    <strong> Voice Actor</strong>
-                </p>
-                <hr class="my-2 border-t-2 border-gray-300">
             </div>
         </div>
     </div>
